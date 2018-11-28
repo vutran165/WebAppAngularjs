@@ -1,0 +1,321 @@
+﻿<!--<form></form>--><!-- KHông hiểu sao để thế này thì nó mới không bị lỗi T_T-->
+<div class="panel panel-default">
+    <div class="panel-heading panel-toolbar">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="goHome()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="panel-body" style="background-color: #F3F3F3" ng-form name="_form">
+        <div class="form-group row">
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Số phiếu<span style="color: red">(*)</span>
+                </div>
+                <div class="md-4-style-input">
+                    <input style="line-height:inherit;width:100%" class="input-border-form" ng-model="target.maChungTu" type="text" disabled required />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Ngày lập phiếu<span style="color: red">(*)</span>
+                </div>
+                <div class="md-4-style-input">
+                    <input style="line-height:inherit;width:100%" class="input-border-form" ng-model="target.ngayCT" type="date" datepicker-localdate required />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                </div>
+                <div class="md-4-style-input">
+                    <div class="add-input-zone">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Số chứng từ<span style="color: red">(*)</span>
+                </div>
+                <div class="md-4-style-input">
+                    <input style="line-height:inherit;width:100%" class="input-border-form" ng-model="target.maHoaDon" type="text" required />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Ngày chứng từ<span style="color: red">(*)</span>
+                </div>
+                <div class="md-4-style-input">
+                    <input style="line-height:inherit;width:100%" class="input-border-form" ng-model="target.ngayHoaDon" type="date" datepicker-localdate required />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    <input type="radio" name="placeExport" value="1" ng-model="target.placeExport" checked ng-change="changePlaceExport(target.placeExport)" />
+                    Cửa hàng<span style="color: red">(*)</span>
+                </div>
+                <div class="md-4-style-input">
+                    <div class="add-input-zone">
+                        <input class="input-border-form" name="_maCuaHang" type="text" ng-model="target.maCuaHang" ng-disabled="target.placeExport == 2" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.unitUsers | filter:{extendValue:target.maSoThue}  | limitTo:5" typeahead-on-select="selectedCuaHang($item)" typeahead-input-formatter="displayHelper($model, 'unitUsers')" />
+                    </div>
+                    <span style="color:red" ng-show="_form._maCuaHang.$dirty && _form._maCuaHang.$invalid">
+                        <span ng-show="_form._maCuaHang.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Tên cửa hàng
+                </div>
+                <div class="md-4-style-input">
+                    <input class="input-border-form" name="_makhachHang" type="text" ng-model="target.tenCuaHang" ng-disabled="target.placeExport == 2" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    <input type="radio" name="placeExport" value="2" ng-model="target.placeExport" ng-change="changePlaceExport(target.placeExport)"  />
+                    Kho hàng<span style="color: red">(*)</span>
+                </div>
+                <div class="md-4-style-input">
+                    <div class="add-input-zone">
+                        <input class="input-border-form" name="_maKhoXuat" type="text" ng-model="target.maKhoXuat" ng-disabled="target.placeExport == 1" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.wareHouses | filter:{extendValue:target.maSoThue}  | limitTo:5" typeahead-on-select="selectedKhoXuat($item)" typeahead-input-formatter="displayHelper($model, 'wareHouses')" />
+                    </div>
+                    <span style="color:red" ng-show="_form._maKhoXuat.$dirty && _form._maKhoXuat.$invalid">
+                        <span ng-show="_form._maKhoXuat.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Tên Kho hàng
+                </div>
+                <div class="md-4-style-input">
+                    <input class="input-border-form" name="_tenKhoXuat" type="text" ng-model="target.tenKhoXuat" ng-disabled="target.placeExport == 1" />
+                </div>
+            </div>
+        </div>
+        <!-- <div class="form-group row"> -->
+        <!-- <div class="col-md-4"> -->
+        <!-- <div class="md-style-label-input"> -->
+        <!-- Mã kho xuất<span style="color: red">(*)</span> -->
+        <!-- </div> -->
+        <!-- <div class="md-4-style-input"> -->
+        <!-- <div class="add-input-zone"> -->
+        <!-- <input class="input-border-form" name="_maKhoXuat" type="text" ng-model="target.maKhoXuat" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.wareHouses | filter:{extendValue:target.maDoanhNghiep} | limitTo:5" typeahead-on-select="selectedKhoXuat($item)" typeahead-input-formatter="formatLabel($model, 'wareHouses')" required /> -->
+        <!-- <div class="add-input-able" ng-click="createWareHouse(target, 'maKhoXuat')"> -->
+        <!-- </div> -->
+        <!-- <span style="color:red" ng-show="_form._maKhoXuat.$dirty && _form._maKhoXuat.$invalid"> -->
+        <!-- <span ng-show="_form._maKhoXuat.$error.required">Không được để trống</span> -->
+        <!-- </span> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- <div class="col-md-4"> -->
+        <!-- <div class="md-style-label-input"> -->
+        <!-- Tên cửa hàng -->
+        <!-- </div> -->
+        <!-- <div class="md-4-style-input"> -->
+        <!-- <input class="input-border-form" name="_soHd" type="text" ng-model="target.tenKhoXuat" disabled /> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <!-- </div> -->
+        <div class="form-group row">
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Loại tiền<span style="color: red">(*)</span>
+                </div>
+                <div class="md-4-style-input">
+                    <div class="add-input-zone">
+                        <input class="input-border-form" name="_ngoaiTe" type="text" ng-model="target.ngoaiTe" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.currencies | filter:$viewValue" typeahead-input-formatter="nameCurrency($model, 'currencies')" required />
+                        <span style="color:red" ng-show="_form._ngoaiTe.$dirty && _form._ngoaiTe.$invalid">
+                            <span ng-show="_form._ngoaiTe.$error.required">Không được để trống</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Thành tiền quy đổi
+                </div>
+                <div class="md-4-style-input">
+                    <div class="add-input-zone">
+                        <input class="input-border-form" name="_quyDoi" type="text" ng-model="target.quyDoi" disabled />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Nhân viên bán hàng
+                </div>
+                <div class="md-4-style-input">
+                    <div class="add-input-zone">
+                        <input class="input-border-form" name="_makhachHang" type="text" ng-model="target.nguoiXuat" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="md-style-label-input">
+                    Đối tượng<span style="color: red">(*)</span>
+                </div>
+                <div class="md-4-style-input">
+                    <select class="input-border-form" style="width:100%;" ng-model="doiTuong" ng-options="opt.text for opt in tempData.doiTuongs" ng-change="selectedDoiTuong(doiTuong)"></select>
+                </div>
+            </div>
+            <div class="col-md-4" ng-if="isDT4">
+                <div class="md-style-label-input">
+                    Họ tên người mua hàng
+                </div>
+                <div class="md-4-style-input">
+                    <div class="add-input-zone">
+                        <input class="input-border-form" name="_soHd" type="text" ng-model="target.nguoiMua" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-include="doiTuong.parent"></div>
+        <div class="form-group row">
+            <div class="col-md-8">Chọn mặt hàng:</div>
+            <table class="data-detail table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width:08% !important" class="text-center">Mã HS</th>
+                        <th style="width:15% !important" class="text-center">Mã hàng</th>
+                        <th style="width:15% !important" class="text-center">Tên hàng</th>
+                        <th style="width:08% !important" class="text-center">Số tờ khai</th>
+                        <th style="width:15% !important" class="text-center">Ngày tờ khai</th>
+                        <th style="width:15% !important" class="text-center">Ngày hết hạn TK</th>
+                        <th style="width:08% !important" class="text-center">Số lượng</th>
+                        <th style="width:5% !important" class="text-center">Đơn giá</th>
+                        <th style="width:08% !important" class="text-center">Thành tiền</th>
+                        <th style="width:05% !important">Thêm</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align:center">
+                        <td>{{newItem.maNhomVatTu}}</td>
+                        <td>
+                            <input type="text" class="input-border-form" style="width:100%;" name="_maHang" ng-model="newItem.maHang" ng-blur="selectedMaHang(newItem.maHang)" maxlength="50" placeholder="Mã hàng" />
+                        </td>
+                        <td style="text-align:left"><span style="">{{newItem.tenHang}}</span></td>
+                        <td>
+                            <input class="input-border-form" style="width:100%;" ng-model="newItem.soToKhai">
+                        </td>
+                        <td>
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="newItem.ngayToKhai" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayToKhai" datepicker-localdate />
+                                <div class="button-calender" ng-click="_ngayToKhai =!_ngayToKhai; config.delegateEvent($event);"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="newItem.hanSuDung" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" is-open="_hanSuDung" datepicker-localdate />
+                                <div class="button-calender" ng-click="_hanSuDung =!_hanSuDung; config.delegateEvent($event);"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <input class="input-border-form" type="number" min="0" style="width:100%" value="0" ng-change="robot.changeSoLuong(newItem)" ng-model="newItem.soLuong">
+                        </td>
+                        <td style="text-align:right"><input class="input-border-form" ng-model="newItem.donGia" ng-change="robot.changeDonGia(newItem)"></td>
+                        <td style="text-align:right">{{newItem.thanhTien | number}}</td>
+                        <td style="text-align:center">
+                            <a ng-click="addToOrder(newItem)"><span class="glyphicon glyphicon-plus" style="color:#0026ff;"></span></a>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <div class="form-group row">
+            <div class="col-md-8">Danh sách mặt hàng:</div>
+            <table class="data-detail table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width:08% !important" class="text-center">Mã HS</th>
+                        <th style="width:10% !important" class="text-center">Mã hàng</th>
+                        <th style="width:15% !important" class="text-center">Tên hàng</th>
+                        <th style="width:08% !important" class="text-center">Số tờ khai</th>
+                        <th style="width:15% !important" class="text-center">Ngày tờ khai</th>
+                        <th style="width:15% !important" class="text-center">Ngày hết hạn TK</th>
+                        <th style="width:08% !important" class="text-center">Số lượng</th>
+                        <th style="width:08% !important" class="text-center">Đơn giá</th>
+                        <th style="width:08% !important" class="text-center">Thành tiền</th>
+                        <th style="width:05% !important">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in target.dataDetails track by $index" style="text-align:center">
+                        <td>{{item.maNhomVatTu}}</td>
+                        <td>{{item.maHang}}</td>
+                        <td style="text-align:left"><span style="">{{item.tenHang}}</span></td>
+                        <td>
+                            {{item.soToKhai}}
+                        </td>
+                        <td>
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="item.ngayToKhai" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayToKhai" datepicker-localdate />
+                                <div class="button-calender" ng-click="_ngayToKhai =!_ngayToKhai; config.delegateEvent($event);"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="item.hanSuDung" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" is-open="_hanSuDung" datepicker-localdate />
+                                <div class="button-calender" ng-click="_hanSuDung =!_hanSuDung; config.delegateEvent($event);"></div>
+                            </div>
+                        </td>
+                        <td>
+                            <input class="input-border-form" type="number" min="0" style="width:100%" ng-change="changeSoLuong(item)" ng-model="item.soLuong">
+                        </td>
+                        <td style="text-align:right">{{item.donGia | number}}</td>
+                        <td style="text-align:right">{{item.thanhTien | number}}</td>
+                        <td style="text-align:center">
+                            <a ng-click="removeToOrder($index)"><span class="glyphicon glyphicon-remove" style="color:#FF0000;"></span></a>
+                        </td>
+
+                    </tr>
+                    <tr style="text-align:center">
+                        <td colspan="8" style="color:red; text-align:center">Tổng</td>
+                        <td>{{robot.sum(target.dataDetails, 'thanhTien') | number}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-8">
+            </div>
+            <div class="col-md-4">
+                <table class="caculation-form" style="width:100%">
+                    <tr>
+                        <td><label>Tổng tiền:&nbsp;</label></td>
+                        <td><input class="input-border-form" style="margin-bottom:5px; width:100%;" ng-model="target.thanhTienSauVat" disabled></td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="panel-footer" style="text-align:right;">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid || _formDetail.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>
+

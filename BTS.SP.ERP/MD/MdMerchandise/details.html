@@ -1,0 +1,55 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  </h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+                    <div class="row form-group">
+                        <div class="col-lg-4">
+                            <label>Mã HS</label>
+                            <select class="form-control edit-width-select" ng-model="target.maNhomVatTu" ng-options="opt.value as opt.text for opt in tempData.nhomVatTus" disabled></select>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Seri</label>
+                            <input type="text" class="form-control" ng-model="target.barcode" disabled>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-8">
+                            <label>Mã khác</label>
+                            <input type="text" class="form-control" ng-model="target.maKhac" disabled>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">
+                            <label>Mã hàng hóa/vật tư</label><span style="color: red"> (1*)</span>
+                            <input type="text" class="form-control" ng-model="target.maVatTu" name="_maVatTu" maxlength="50" disabled required>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Tên hàng hóa/vật tư</label>
+                            <input type="text" class="form-control" ng-model="target.tenHang" name="_tenHang" maxlength="300" required disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Tên viết tắt</label>
+                            <input type="text" class="form-control" ng-model="target.tenVietTat" disabled>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">
+                            <label>Đơn vị tính</label>
+                            <select class="form-control edit-width-select" ng-model="target.donViTinh" ng-options="opt.value as opt.text for opt in tempData.donViTinhs" disabled></select>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Đơn giá</label>
+                            <input type="text" class="form-control" ng-model="target.donGia">
+                        </div>
+                    </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

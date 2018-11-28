@@ -1,0 +1,269 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="button-close" ng-click="goIndex()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-default" prevent-default title="In danh sách" ng-click="print()"><span class="glyphicon glyphicon-print"></span>&ensp;In</button>
+            <!--<button class="btn btn-default" prevent-default title="In danh sách" ng-click="printExcel()"><span class="glyphicon glyphicon-print"></span>&ensp;Xuất Excel</button>-->
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="main-report">
+            <br />
+            <style>
+                .date-time,
+                th,
+                td,
+                span {
+                    font-size: 14px;
+                    font-family: 'Times New Roman';
+                }
+
+                th,
+                td {
+                    padding: 2px;
+                }
+
+                .header-report {
+                    margin-bottom: 15px;
+                }
+
+                    .header-report table,
+                    .infor-report table {
+                        width: 100%;
+                        padding-left: 2px;
+                        border: 0;
+                    }
+
+                .infor-report {
+                    padding-left: 50px;
+                }
+
+                .data-report {
+                    margin-bottom: 10px;
+                }
+
+                    .data-report table {
+                        width: 100%;
+                        border: 1px solid;
+                        border-collapse: collapse;
+                    }
+
+                        .data-report table thead tr th,
+                        .data-report table tbody.data-detail tr td {
+                            border: 1px solid;
+                        }
+
+                        .data-report table tbody.data-detail tr td {
+                            font-size: 13px !important;
+                        }
+
+                .infor-report table tr td {
+                    position: relative;
+                }
+
+                .dotted-description {
+                    position: absolute;
+                    width: calc(100% - 110px);
+                    border-bottom: 1px dotted;
+                }
+
+                .signature-place table {
+                    width: 100%;
+                }
+
+                .signature-place .date-time {
+                    float: right;
+                    font-style: italic;
+                    padding: 10px 30px 5px 10px;
+                }
+
+                .signature-place table thead tr th {
+                    text-align: center;
+                }
+
+                .signature-place table tbody tr td {
+                    text-align: center;
+                }
+
+                .end-page {
+                    height: 100px;
+                }
+
+                .label-info-report {
+                    float: left;
+                    font-weight: bold;
+                }
+
+                .info-company-top-left {
+                    float: left;
+                    text-align: center;
+                    font-weight: bold;
+                    margin-left: 10px;
+                }
+
+                .info-datereport-top-right {
+                    float: right;
+                    text-align: center;
+                    font-weight: bold;
+                    padding-right: 20px;
+                }
+
+                .name-report {
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 22px !important;
+                    padding: 5px;
+                }
+
+                .info-contract-attachment {
+                    text-align: center;
+                    font-style: italic;
+                }
+
+                .text-center {
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .name-tong-hop {
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .value-tong-hop {
+                    font-weight: bold;
+                    text-align: right;
+                }
+
+                .unitCustom {
+                    text-transform: uppercase;
+                }
+
+                .title-body-report {
+                    font-weight: bold;
+                }
+            </style>
+
+            <div id="dataTable">
+                <div class="header-report">
+                    <!--<table>
+                        <tr>
+                            <td class="info-company-top-left unitCustom">
+                                <p><b>{{target.tenDoanhNghiep}}</b></p>
+                                <p><span>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span></p>
+                                 TỔNG CỤC HẢI QUAN
+                            </td>
+                            <td class="info-datereport-top-right">
+                                <p>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+                                <p>Độc lập - Tự do - Hạnh phúc</p>
+                                <p><span>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span></p>
+                                <p><i>........., ngày ..... tháng ..... năm.....</i></p>
+                            </td>
+                        </tr>
+                    </table>-->
+                    <div class="row name-report ">
+                        <p>BẢNG KÊ TIỀN MẶT MANG VÀO/RA</p>
+                        <p>KHU CÁCH LY, KHU HẠN CHẾ</p>
+                    </div>
+                    <p class="info-contract-attachment">Ngày: {{target.fromDate | date: 'dd/MM/yyyy'}} </p>
+                </div>
+                <div class="infor-report">
+                    <table>
+                        <tr>
+                            <td colspan="2">
+                                <div class="label-info-report">(1) Tên doanh nghiệp:</div>
+                                <span>&nbsp;{{displayHelper(target.maSoThue,'companies')}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="label-info-report">(2) Mã số thuế:</div>
+                                <span>&nbsp;{{target.maSoThue}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="label-info-report">(3) Cửa hàng:</div>
+                                <span>&nbsp;{{displayHelper(target.maCuaHang,'unitUsers')}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="label-info-report">(4) Địa chỉ CH:</div>
+                                <span>&nbsp;{{target.diaChi}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="label-info-report">(5) Cán bộ HQ xác nhận tiền đưa vào:</div>
+                                <span>&nbsp;{{target.congChuc_GSDV}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="label-info-report">(6) Cán bộ HQ xác nhận tiền đưa ra:</div>
+                                <span>&nbsp;{{target.congChuc_GSDR}}</span>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+                <br>
+                <div class="data-report">
+                    <table style="margin: 15px 0 15px 0;">
+                        <thead>
+                            <tr>    
+                                <th class="text-center" style="width: 5%" rowspan="2">STT</th>
+                                <th class="text-center" style="width: 15%" rowspan="2">Loại tiền</th>
+                                <th class="text-center" style="width: 80%" colspan="2">Lượng tiền mặt</th>
+                            </tr>
+                            <tr>
+                                <th class="text-center">Đưa vào kho miễn thuế và tàu bay</th>
+                                <th class="text-center">Đưa ra kho miễn thuế và tàu bay</th>
+                            </tr>
+                        </thead>
+                        <tbody class="data-detail">
+                            <tr ng-repeat="item in target.dataDetails">
+                                <td style="text-align:center;">{{$index + 1}}</td>
+                                <td  style="text-align:center;">
+                                    {{item.loai_NT}} 
+                                </td>
+                                <td  style="text-align:right;">{{item.triGia_NT_DuaVao}}</td>
+                                <td  style="text-align:right;">
+                                    {{item.triGia_NT_DuaRa}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="signature-place">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width:40%">ĐẠI DIỆN DOANH NGHIỆP KHI ĐƯA TIỀN MẶT VÀO KHU CÁCH LY</th>
+                                <th style="width:20%"></th>
+                                <th style="width:40%">ĐẠI DIỆN DOANH NGHIỆP KHI ĐƯA TIỀN MẶT RA KHỎI KHU CÁCH LY</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><i>(Ký tên, đóng dấu)</i></td>
+                                <td></td>
+                                <td><i>(Ký tên, đóng dấu)</i></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class=end-page></div>
+            </div>
+        </div>
+    </div>

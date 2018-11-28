@@ -1,0 +1,48 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}} </h3>
+        <div class="button-close"  ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên đăng nhập</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.username" name="_Username" disabled>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Họ và tên</label><span style="color: red"> (3)</span>
+                    <input type="text" class="form-control" ng-model="target.fullName" name="_firstName" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Email</label><span style="color: red"> (6)</span>
+                    <input type="email" class="form-control" ng-model="target.email" name="_email" disabled>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Mô tả khác</label><span style="color: red"> (7)</span>
+                    <input type="text" class="form-control" ng-model="target.moTa" name="_moTa" disabled>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Đơn vị</label><span style="color: red"> (8)</span>
+                    <select class="form-control" ng-model="target.unitCode" ng-options="opt.id as opt.text for opt in tempData.donViHaiQuans"  disabled></select>
+                </div>
+                <div class="col-lg-6">
+                    <label>Trạng thái</label><span style="color: red"> (9)</span>
+                    <select class="form-control" ng-model="target.trangThai" ng-init="target.trangThai = 10" ng-options="opt.value as opt.text for opt in tempData.status" disabled></select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

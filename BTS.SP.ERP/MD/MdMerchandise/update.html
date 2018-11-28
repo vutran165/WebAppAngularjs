@@ -1,0 +1,63 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+                    <div class="row form-group">
+                        <div class="col-lg-4">
+                            <label>Mã HS</label>
+                            <select class="form-control edit-width-select" ng-model="target.maNhomVatTu" ng-change="changeNhomVatTu()"  ng-options="opt.value as opt.text for opt in tempData.nhomVatTus"></select>
+                            <div class="add-input-able create-nhom" ng-click="createNhomVatTu(target, 'maNhomVatTu')"></div>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Seri</label>
+                            <input type="text" class="form-control" ng-model="target.barcode">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-8">
+                            <label>Mã khác</label>
+                            <input type="text" class="form-control" ng-model="target.maKhac">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">
+                            <label>Mã hàng hóa/vật tư</label><span style="color: red"> (1*)</span>
+                            <input type="text" class="form-control" ng-model="target.maVatTu" name="_maVatTu" maxlength="50" disabled required>
+                            <span style="color:red" ng-show="_form._maVatTu.$dirty && _form._maVatTu.$invalid">
+                                <span ng-show="_form._maVatTu.$error.required">Không được để trống</span>
+                            </span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Tên hàng hóa/vật tư</label>
+                            <input type="text" class="form-control" ng-model="target.tenHang" name="_tenHang" maxlength="300" ng-blur="toTenVietTat(target)" required>
+                            <span style="color:red" ng-show="_form._tenHang.$dirty && _form._tenHang.$invalid">
+                                <span ng-show="_form._tenHang.$error.required">Không được để trống</span>
+                            </span>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Tên viết tắt</label>
+                            <input type="text" class="form-control" ng-model="target.tenVietTat">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-lg-4">
+                            <label>Đơn vị tính</label>
+                            <select class="form-control edit-width-select" ng-model="target.donViTinh" ng-options="opt.value as opt.text for opt in tempData.donViTinhs"></select>
+                        </div>
+                        <div class="col-lg-4">
+                            <label>Đơn giá</label>
+                            <input type="text" class="form-control" ng-model="target.donGia">
+                        </div>
+                    </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

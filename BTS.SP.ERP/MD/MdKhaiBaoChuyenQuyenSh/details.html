@@ -1,0 +1,73 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Chi tiết khai báo chuyển quyền sở hữu</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã kho</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.maTk" name="_maTk" maxlength="50" disabled/>
+                    <span style="color:red" ng-show="_form._maTk.$dirty && _form._maTk.$invalid">
+                        <span ng-show="_form._maTk.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên kho</label><span style="color: red"> (2*)</span>
+                    <input type="text" class="form-control" ng-model="target.maLoaiTk" name="_maLoaiTk" maxlength="300" disabled/>
+                    <span style="color:red" ng-show="_form._maLoaiTk.$dirty && _form._maLoaiTk.$invalid">
+                        <span ng-show="_form._maLoaiTk.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Chủ kho</label><span style="color: red"> (3*)</span>
+                    <input type="text" ng-model="target.ghiChu" name="_ghiChu" class="form-control" disabled />
+                    <span style="color: red" ng-show="_form._ghiChu.$dirty && _form._ghiChu.$invalid">
+                        <span ng-show="_form._ghiChu.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <div class="lg-style-label-input">
+                        Ngày</label><span style="color: red"> (4*)</span>
+                    </div>
+                    <div class="lg-6-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" type="text" ng-model="target.iCreateDate" placeholder="{{config.dateFormat}}"
+                                   uib-datepicker-popup="{{config.dateFormat}}" is-open="_maDonVi" datepicker-localdate disabled />
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+            <div class="row form-group">
+
+                <!--<div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <select class="form-control" ng-model="target.trangThai" ng-init="target.trangThai = 10" ng-options="opt.value as opt.text for opt in tempData.status"></select>
+                </div>-->
+                <div class="col-lg-6">
+                    <label>Người được chuyển</label><span style="color: red"> (5*)</span>
+                    <input type="text" ng-model="target.tenTk" name="_tenTk" class="form-control" disabled />
+                    <span style="color:red" ng-show="_form._tenTk.$dirty && _form._tenTk.$invalid">
+                        <span ng-show="_form._tenTk.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Số quyết định</label><span style="color: red"> (6*)</span>
+                    <input type="text" ng-model="target.maTkCha" name="_maTkCha" class="form-control" required />
+                    <span style="color: red" ng-show="_form._maTkCha.$dirty && _form._maTkCha.$invalid">
+                        <span ng-show="_form._maTkCha.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

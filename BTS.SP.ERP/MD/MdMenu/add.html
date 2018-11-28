@@ -1,0 +1,53 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Menu cha</label>
+                    <select class="form-control" ng-model="target.maCha" ng-options="opt.value as opt.text for opt in tempData.menus"></select>
+                </div>
+                <div class="col-lg-6">
+                    <label>Mã menu</label><span style="color: red"> (*)</span>
+                    <input type="text" class="form-control" ng-model="target.maMenu" name="_ma" maxlength="50" required>
+                    <span style="color: red" ng-show="_form._ma.$dirty && _form._ma.$invalid">
+                        <span ng-show="_form._ma.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên menu</label><span style="color: red"> (*)</span>
+                    <input type="text" class="form-control" ng-model="target.tenMenu" name="_title" maxlength="50" required>
+                    <span style="color: red" ng-show="_form._title.$dirty && _form._title.$invalid">
+                        <span ng-show="_form._title.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+
+                <div class="col-lg-6">
+                    <label>Thứ tự hiển thị</label><span style="color: red"> (*)</span>
+                    <input type="text" class="form-control" ng-model="target.sort" name="_sort" maxlength="50" required>
+                    <span style="color: red" ng-show="_form._sort.$dirty && _form._sort.$invalid">
+                        <span ng-show="_form._sort.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Trạng thái</label><span style="color: red"> (*)</span>
+                    <select class="form-control" ng-init="target.trangThai = 10" ng-model="target.trangThai" ng-options="opt.value as opt.text for opt in tempData.status"></select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

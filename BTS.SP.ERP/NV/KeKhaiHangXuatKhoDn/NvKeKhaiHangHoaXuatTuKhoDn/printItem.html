@@ -1,0 +1,58 @@
+﻿<style>
+    .table thead th {
+        text-align: center;
+    }
+
+    td {
+        text-align: center;
+    }
+</style>
+<form></form><!-- KHông hiểu sao để thế này thì nó mới không bị lỗi T_T-->
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body" ng-form name="_form">
+        <div id="tableToExport">
+            <table style="text-align:center" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th style="width:10%">Masieuthi</th>
+                        <th style="width:20%">Tenviettat</th><!-- ten hang hoa-->
+                        <th>Barcode</th>
+                        <th style="width:10%">Giabanbuoncovat</th>
+                        <th style="width:10%">Giabanlecovat</th>
+                        <th>Makhachhang</th><!-- nha cung cap-->
+                        <th>Soluong</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in lstMerchandise">
+                        <th scope="row">{{$index + 1}}</th>
+                        <td><div>{{item.maHang}}</div></td>
+                        <td>{{item.tenHang}}</td>
+                        <td></td>
+                        <td>{{item.giaBanLe}} VND</td><!-- gia buon cos vat-->
+                        <td>{{item.giaBanLe}} VND</td><!-- gia le cos vat-->
+                        <td>{{dataHangHoa.maKhachHang}}</td><!-- nha cung cap-->
+                        <td>
+                            <div class="soLuong ng-binding" style="display: none;">{{item.soLuong}}</div>
+                            <div class="md-4-style-input">
+                                <input class="input-border-form" type="number" ng-model="item.soLuong" maxlength="50">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid || Loading" ng-click="exportToExcel('#tableToExport')">{{config.label.btnExport}}</button>
+        <a class="btn btn-primary" ng-href="{{hrefTem}}" >Tải xuống </a>
+        <button prevent-default class="btn btn-default" ng-disabled="Loading" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

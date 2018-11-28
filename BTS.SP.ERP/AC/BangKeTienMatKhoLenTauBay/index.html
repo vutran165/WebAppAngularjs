@@ -1,0 +1,112 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-bookmark"></span> Bảng kê tiền mặt, ngoại tệ vận chuyển giữa kho miễn thuế và tàu bay
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>{{target.tenHaiQuan}}</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagDonViHaiQuans" class="tag label label-success">
+                                            {{item.tenHaiQuan}}
+                                            <a class="close" href="" ng-click="removeDonViHaiQuan($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectDonViHaiQuan()">Hải Quan</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Ngày</label>
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="target.fromDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="fromDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="fromDate = !fromDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Đến ngày</label>
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="target.toDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="toDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="toDate = !toDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Doanh nghiệp</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagCompanies" class="tag label label-success" name="_maDoanhNghiep" ng-model="target.maDoanhNghiep">
+                                            {{item.text}}
+                                            <a class="close" href="" ng-click="removeCompany($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectCompany()">Doanh Nghiệp</button>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Cửa hàng</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagUnitUsers" class="tag label label-success">
+                                            {{item.text}}
+                                            <a class="close" href="" ng-click="removeUnitUser($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectUnitUser()">Cửa hàng</button>
+                                </div>
+                            </div>-->
+                        </div>
+
+                    </div>
+                    <!--<div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input id="sophieu" type="radio" ng-model="target.groupByType" value="1" checked />
+                                <label for="sophieu">Nhóm theo doanh nghiệp</label></br>
+                                <input id="haiquan" type="radio" ng-model="target.groupByType" value="2" />
+                                <label for="haiquan">Nhóm theo đơn vị HQ</label></br>
+                                <input id="doanhnghiep" type="radio" ng-model="target.groupByType" value="3" />
+                                <label for="doanhnghiep">Nhóm theo số phiêu</label></br>
+                            </div>
+                        </div>
+
+                    </div>-->
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" ng-disabled="tagCompanies.length == 0" prevent-default ng-click="report()">Báo cáo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" ng-disabled="tagCompanies.length == 0" prevent-default ng-click="printExcel()">Xuất Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

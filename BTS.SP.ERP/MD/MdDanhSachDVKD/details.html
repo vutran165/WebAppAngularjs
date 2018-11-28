@@ -1,0 +1,45 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã đơn vị</label>
+                    <input type="text" class="form-control" ng-model="target.maDonVi" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên Đơn vị</label>
+                    <input type="text" class="form-control" ng-model="target.tenDonVi" disabled>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Địa chỉ</label>
+                    <input type="text" class="form-control" ng-model="target.diaChiDonVi" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Số điện thoại</label>
+                    <input type="text" class="form-control" ng-model="target.soDienThoai" disabled>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Đơn vị chủ quản</label>
+                    <input type="text" ng-model="target.donViHaiQuanChuQuan" disabled/>
+                </div>
+                <div class="col-lg-6">
+                    <label>Email</label>
+                    <input type="text" class="form-control" ng-model="target.email" disabled>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span>&ensp;{{config.label.btnCancel}}</button>
+    </div>
+</div>

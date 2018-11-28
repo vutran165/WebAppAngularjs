@@ -1,0 +1,204 @@
+﻿<form></form><!-- KHông hiểu sao để thế này thì nó mới không bị lỗi T_T-->
+<style>
+    #myWorkContent {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+
+      #_timeUpdate {
+        color: red;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
+    }
+</style>
+<div>
+    <div>
+        <div class="modal-header">
+            <h3 class="modal-title">{{title()}}</h3>
+            <div class="button-close" ng-click="cancel()">
+                <i class="glyphicon glyphicon-remove x-close"></i>
+            </div>
+        </div>
+        <p id="_timeUpdate" style="text-align: center">
+            <span>{{warning}}</span>
+        </p>
+        <uib-tabset>
+            <uib-tab ng-repeat="item in dataHistory">
+                <uib-tab-heading>
+                    <div id="_timeUpdate">
+                        <span>{{item.timeUpdate}}</span><br />
+                        <span>{{item.ngaySua | date :"dd/MM/yyyy ' - ' h:mma"}}</span>
+                    </div>
+                </uib-tab-heading>
+                <div class="modal-body" ng-form name="_form">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="md-style-label-input">
+                                    Số phiếu
+                                </div>
+                                <div class="md-4-style-input">
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="item.soPhieu" maxlength="50" name="_soToKhai" disabled />
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="md-style-label-input">
+                                    Tên người mua hàng
+                                </div>
+                                <div class="md-4-style-input">
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" name="_tenKhachHang" type="text" ng-model="item.tenKhachHang" disabled />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="md-style-label-input">
+                                    Số hộ chiếu/giấy thông hành/thẻ lên bờ của hành khách:
+                                </div>
+                                <div class="md-4-style-input">
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="item.hoChieuCmNd" maxlength="50" name="_hoChieuCmNd" typeahead-editable="false" disabled />
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="md-style-label-input">
+                                    Số hiệu chuyến bay, số hiệu phương tiện xuất cảnh (nếu có):
+                                </div>
+                                <div class="md-4-style-input">
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" name="_tenKhachHang" type="text" ng-model="item.soHieuChuyenBay" disabled />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="md-style-label-input">
+                                    Số hóa đơn
+                                </div>
+                                <div class="md-4-style-input">
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" name="_soHoaDon" type="text" ng-model="item.soHoaDon" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="md-style-label-input">
+                                    Ngày hóa đơn
+                                </div>
+                                <div class="md-4-style-input">
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="item.ngayHoaDon" placeholder="{{config.dateFormat}}"
+                                               uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayHoaDon" datepicker-localdate disabled />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <uib-tabset active="active">
+                        <uib-tab index="0" heading="Chi tiết">
+                            <div id="myWorkContent">
+                                <table class="table table-bordered table-hover table-condensed" style="width:1500px">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">STT</th>
+                                            <th class="text-center">Tên hàng</th>
+
+                                            <th class="text-center">Đơn vị tính</th>
+                                            <th class="text-center">Số lượng</th>
+                                            <th class="text-center">Số lượng đã kê khai</th>
+                                            <th class="text-center">Trị giá</th>
+                                            <th class="text-center">Ghi chú</th>
+
+
+
+                                        </tr>
+                                        <tr>
+                                            <th></th>
+                                            <th class="text-center">(1)</th>
+                                            <th class="text-center">(2)</th>
+                                            <th class="text-center">(3)</th>
+                                            <th class="text-center">(4)</th>
+                                            <th class="text-center">(5)</th>
+                                            <th class="text-center">(6)</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody ng-form name="_formDetail">
+                                        <tr ng-if="isLoading">
+                                            <td colspan="16"><my-loading></my-loading></td>
+                                        </tr>
+                                        <tr ng-repeat="obj in item.dataDetails track by $index">
+                                            <td class="text-center">{{$index + 1}}</td>
+                                            <td nowrap>
+                                                {{obj.tenHang}}
+                                            </td>
+                                            <td>
+                                                {{obj.donViTinh}}
+                                            </td>
+                                            <td ng-style="obj.colorRecord && {'background-color':'yellow'}">
+                                                {{obj.soLuong}}
+                                            </td>
+                                            <td ng-style="obj.colorRecord && {'background-color':'yellow'}">
+                                                {{obj.soLuongDaKeKhai}}
+                                            </td>
+                                            <td>
+                                                {{obj.triGia}}
+                                            </td>
+                                            <td>
+                                                {{obj.ghiChu}}
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="panel-footer">
+                                <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                                ng-change="pageChanged()"
+                                                items-per-page="paged.itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                                                boundary-links="true" num-pages="paged.totalPage"
+                                                previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                                </uib-pagination>
+                            </div>
+                        </uib-tab>
+                    </uib-tabset>
+                </div>
+            </uib-tab>
+
+        </uib-tabset>
+
+    </div>
+    <div class="modal-footer">
+        <span ng-show="Loading"><my-loading></my-loading></span>
+        <button prevent-default class="btn btn-default" ng-disabled="Loading" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

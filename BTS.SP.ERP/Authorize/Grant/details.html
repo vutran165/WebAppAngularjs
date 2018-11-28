@@ -1,0 +1,44 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <table class="table table-striped jambo_table bulk_action">
+                <thead>
+                    <tr class="headings">
+                        <th class="column-title">STT</th>
+                        <th class="column-title">Tên đăng nhập</th>
+                        <th class="column-title">Menu</th>
+                        <th class="column-title">Xem</th>
+                        <th class="column-title">Thêm</th>
+                        <th class="column-title">Sửa</th>
+                        <th class="column-title">Xóa</th>
+                        <th class="column-title">Duyệt</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="isLoading">
+                        <td colspan="5"><my-loading></my-loading></td>
+                    </tr>
+                    <tr class="even pointer">
+                        <td>{{$index+1}}</td>
+                        <td>{{target.username}}</td>
+                        <td>{{target.menu}}</td>
+                        <td ng-bind-html="target.isView |displayBool"></td>
+                        <td ng-bind-html="target.idAdd |displayBool"></td>
+                        <td ng-bind-html="target.isEdit |displayBool"></td>
+                        <td ng-bind-html="target.isDelete |displayBool"></td>
+                        <td ng-bind-html="target.isApprove |displayBool"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span>&ensp;{{config.label.btnCancel}}</button>
+    </div>
+</div>

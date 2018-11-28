@@ -1,0 +1,225 @@
+﻿<style>
+    .btn {
+        padding: 6px 6px !important;
+        line-height: 0.7 !important;
+    }
+
+    .label-success {
+        background-color: #f5f5f5;
+        color: #666;
+        border: 1px solid #d9d9d9;
+    }
+
+    .label {
+        display: block !important;
+        margin-bottom: 8px !important;
+        float: left !important;
+        font-size: 13px !important;
+        margin-right: 10px !important;
+        font-weight: normal !important;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-top: 0px !important;
+    }
+
+    .style-baocao {
+        float: left !important;
+        /*width: 400px !important;*/
+        height: 32px !important;
+    }
+
+    .close_btn {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000 !important;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .5;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-bookmark"></span> Báo cáo lượng hàng hóa bán cho từng đối tượng mua hàng
+                    </h3>
+                </div>
+                <div class="panel-body" ng-form name="_form">
+
+                    <table class="table">
+                        <tbody>
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;line-height: 30px;"><label>Đối tượng (<span style="color:red; vertical-align:middle;">*</span>):  </label></td>
+                                <td colspan="2">
+                                    <select class="form-control style-baocao" ng-model="target.doiTuongCodes" ng-options="opt.value as opt.text for opt in tempData.doiTuongs"></select>
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label>Ngày hạch toán:  </label></td>
+                                <td col="2">
+
+                                    <label style="float:left; margin-right:10px;">Từ ngày</label>
+                                    <div class="add-input-zone" style="float:left;">
+                                        <input class="input-border-form" type="text" ng-model="target.fromDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="fromDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="fromDate = !fromDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+
+                                    <label style="float:left; margin-right:10px; margin-left:50px;">Đến ngày</label>
+                                    <div class="add-input-zone" style="float:left;">
+                                        <input class="input-border-form" type="text" ng-model="target.toDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="toDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="toDate = !toDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px; line-height: 30px;"><label class="control-label">Đơn vị Hải quan: </label></td>
+                                <td colspan="2">
+                                    <input type="text" ng-model="filtered.advanceData.maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)" style="float: left; width: 80px; height: 32px; border: 1px solid #ccc; border-radius: 5px; margin-right: 8px;" />
+                                    <div style="float: left; width: 420px;">
+                                        <select class="form-control style-baocao" ng-options="opt.value as opt.description for opt in tempData.donViHaiQuans" ng-model="filtered.advanceData.maHaiQuan" name="_maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)">
+                                            <option value="" style="float: left; text-align: center;">----------- Lựa chọn đơn vị hải quan -----------</option>
+                                        </select>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label class="control-label">Doanh nghiệp: </label></td>
+                                <td><button type="button" class="btn btn-primary" ng-click="selectCompany()">Chọn</button></td>
+                                <td>
+                                    <div ng-repeat="item in tagCompanies" class="tag label label-success">
+                                        {{item.text}}
+                                        <a class="close_btn" href="" ng-click="removeCompany($index)">×</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label class="control-label">Cửa hàng: </label></td>
+                                <td><button type="button" class="btn btn-primary" ng-click="selectUnitUser()">Chọn</button></td>
+                                <td>
+                                    <div ng-repeat="item in tagUnitUsers" class="tag label label-success">
+                                        {{item.text}}
+                                        <a class="close_btn" href="" ng-click="removeUnitUser($index)">×</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!--<div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Đối tượng</label>
+                                <div class="tags">
+                                    <div ng-repeat="item in tagDoiTuongs" class="tag label label-success">
+                                        {{item.value}}
+                                        <a class="close" href="" ng-click="removeDoiTuong($index)">×</a>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" ng-click="selectDoiTuong()">Đối tượng</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Từ ngày</label>
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="target.fromDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="fromDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="fromDate = !fromDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Đến ngày</label>
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="target.toDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="toDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="toDate = !toDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{data.tenHaiQuan}}</label>
+                                <div class="tags">
+                                    <div ng-repeat="item in tagDonViHaiQuans" class="tag label label-success">
+                                        {{item.tenHaiQuan}}
+                                        <a class="close" href="" ng-click="removeDonViHaiQuan($index)">×</a>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" ng-click="selectDonViHaiQuan()">Hải Quan</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Doanh nghiệp</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagCompanies" class="tag label label-success">
+                                            {{item.text}}
+                                            <a class="close" href="" ng-click="removeCompany($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectCompany()">Doanh Nghiệp</button>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Cửa hàng</label>
+                                        <div class="tags">
+                                            <div ng-repeat="item in tagUnitUsers" class="tag label label-success">
+                                                {{item.text}}
+                                                <a class="close" href="" ng-click="removeUnitUser($index)">×</a>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" ng-click="selectUnitUser()">Cửa hàng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>-->
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" prevent-default ng-click="report()" ng-disabled="isListItemNull()">Báo cáo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" prevent-default ng-click="exportToExcel()" ng-disabled="isListItemNull()">Xuất Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

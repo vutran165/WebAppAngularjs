@@ -1,0 +1,88 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã Chứng từ</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.maCTu" name="_maChungTu" maxlength="50" required>
+                    <span style="color:red" ng-show="_form._maChungTu.$dirty && _form._maChungTu.$invalid">
+                        <span ng-show="_form._maChungTu.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Mã Loại Chứng từ</label>
+                    <select class="form-control" ng-model="target.maLoaiCTu" ng-options="opt.value as opt.text for opt in tempData.voucherTypes">
+                        <option value="">-</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên chứng từ</label><span style="color: red"> (2*)</span>
+                    <input type="text" class="form-control" ng-model="target.tenCTu" name="_tenChungTu" maxlength="300" required>
+                    <span style="color:red" ng-show="_form._tenChungTu.$dirty && _form._tenChungTu.$invalid">
+                        <span ng-show="_form._tenChungTu.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <select class="form-control" ng-model="target.trangThai" ng-init="target.trangThai = 10" ng-options="opt.value as opt.text for opt in tempData.status">
+                    </select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã Tài Khoản Nợ</label>
+                        <input type="text" ng-model="target.matkNo" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.accounts | filter:$viewValue" class="form-control">
+                    </div>
+                <div class="col-lg-6">
+                    <label>Mã Tài Khoản Có</label>
+                        <input type="text"  ng-model="target.maTkCo" typeahead-editable="false"  uib-typeahead="opt.value as opt.text for opt in tempData.accounts | filter:$viewValue" class="form-control">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Phiếu</label>
+                    <select type="text" ng-model="target.type" ng-init="target.type = 'PKHAC'" ng-options="opt.value as opt.text for opt in tempData.loaiChungTus" class="form-control"></select>
+                </div>
+            </div>
+            <div class="row form-group">
+
+                <div class="col-lg-6">
+                    <label>Từ ngày</label>
+                    <div class="input-group ">
+                        <input type="text" class="form-control" ng-model="target.fromDate" placeholder="{{config.dateFormat}}"
+                               uib-datepicker-popup="{{config.dateFormat}}" datepicker-localdate is-open="frmDay" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="frmDay = !frmDay; config.delegateEvent($event);">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <label>Đến ngày</label>
+                    <div class="input-group ">
+                        <input type="text" class="form-control" ng-model="target.toDate" placeholder="{{config.dateFormat}}"
+                               uib-datepicker-popup="{{config.dateFormat}}" is-open="toDay" datepicker-localdate/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="toDay = !toDay; config.delegateEvent($event);">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+</form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

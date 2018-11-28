@@ -1,0 +1,59 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Thêm khai báo gia hạn</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã kho</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.maBoHang" name="_maBoHang" maxlength="50" required>
+                    <span style="color:red" ng-show="_form._maBoHang.$dirty && _form._maBoHang.$invalid">
+                        <span ng-show="_form._maBoHang.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên hàng</label><span style="color: red"> (2*)</span>
+                    <input type="text" class="form-control" ng-model="target.tenBoHang" name="_tenBoHang" maxlength="300" required>
+                    <span style="color:red" ng-show="_form._tenBoHang.$dirty && _form._tenBoHang.$invalid">
+                        <span ng-show="_form._tenBoHang.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="lg-style-label-input">
+                        Ngày<span style="color: red"> (4*)</span>
+                    </div>
+                    <div class="lg-6-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" type="text" ng-model="target.iCreateDate" placeholder="{{config.dateFormat}}"
+                                   uib-datepicker-popup="{{config.dateFormat}}" is-open="_iCreateDate" datepicker-localdate />
+                            <div class="button-calender" ng-click="_iCreateDate =!_iCreateDate; config.delegateEvent($event);"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="lg-style-label-input">
+                        Ngày<span style="color: red"> (4*)</span>
+                    </div>
+                    <div class="lg-6-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" type="text" ng-model="target.iUpdateDate" placeholder="{{config.dateFormat}}"
+                                   uib-datepicker-popup="{{config.dateFormat}}" is-open="_iUpdateDate" datepicker-localdate />
+                            <div class="button-calender" ng-click="_iUpdateDate =!_iUpdateDate; config.delegateEvent($event);"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

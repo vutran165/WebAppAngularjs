@@ -1,0 +1,34 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close"  ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <input type="hidden" ng-model="target.id">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên đăng nhập</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.userName" name="_Username" required>
+                    <span style="color:red" ng-show="_form._Username.$dirty && _form._Username.$invalid">
+                        <span ng-show="_form._Username.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Mật khẩu</label><span style="color: red"> (2*)</span>
+                    <input type="password" class="form-control" ng-pattern="/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/" ng-model="target.password" name="_Password" required>
+                    <span style="color:red" ng-show="_form._Password.$dirty && _form._Password.$invalid">
+                        <span ng-show="_form._Password.$error.required">Không được để trống</span>
+                        <span ng-show="_form._Password.$error.pattern">Mật khẩu phải có 6 ký tự trở lên bắt buộc phải có số, ký tự đặc biệt!</span>
+                    </span>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

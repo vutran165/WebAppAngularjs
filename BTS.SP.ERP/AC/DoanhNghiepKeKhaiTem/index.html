@@ -1,0 +1,141 @@
+﻿<style>
+    .btn {
+        padding: 6px 6px !important;
+        line-height: 0.7 !important;
+    }
+
+    .label-success {
+        background-color: #f5f5f5;
+        color: #666;
+        border: 1px solid #d9d9d9;
+    }
+
+    .label {
+        display: block !important;
+        margin-bottom: 8px !important;
+        float: left !important;
+        font-size: 13px !important;
+        margin-right: 10px !important;
+        font-weight: normal !important;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-top: 0px !important;
+    }
+
+    .form-control {
+        float: left !important;
+        /*width: 400px !important;*/
+        height: 32px !important;
+    }
+
+    .close_btn {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000 !important;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .5;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-bookmark"></span> Báo cáo theo dõi tem cấp phép
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label>Ngày hạch toán:  </label></td>
+                                <td col="2">
+
+                                    <label style="float:left; margin-right:10px;">Từ ngày</label>
+                                    <div class="add-input-zone" style="float:left;">
+                                        <input class="input-border-form" type="text" ng-model="target.fromDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="fromDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="fromDate = !fromDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+
+                                    <label style="float:left; margin-right:10px; margin-left:50px;">Đến ngày</label>
+                                    <div class="add-input-zone" style="float:left;">
+                                        <input class="input-border-form" type="text" ng-model="target.toDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="toDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="toDate = !toDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px; line-height: 30px;"><label class="control-label">Đơn vị Hải quan: </label></td>
+                                <td colspan="2">
+                                    <!--<div ng-repeat="item in tagDonViHaiQuans" class="tag label label-success">
+                                        {{item.tenHaiQuan}}
+                                        <a class="close_btn" href="" ng-click="removeDonViHaiQuan($index)">×</a>
+                                    </div>-->
+
+                                    <input type="text" ng-model="filtered.advanceData.maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)" style="float: left; width: 80px; height: 32px; border: 1px solid #ccc; border-radius: 5px; margin-right: 8px;" />
+                                    <div style="float: left; width: 420px;">
+                                        <select class="form-control" ng-options="opt.value as opt.description for opt in tempData.donViHaiQuans" ng-model="filtered.advanceData.maHaiQuan" name="_maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)">
+                                            <option value="" style="float: left; text-align: center;">----------- Lựa chọn đơn vị hải quan -----------</option>
+                                        </select>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label class="control-label">Doanh nghiệp: </label></td>
+                                <td><button type="button" class="btn btn-primary" ng-click="selectCompany()">Chọn</button></td>
+                                <td>
+                                    <div ng-repeat="item in tagCompanies" class="tag label label-success">
+                                        {{item.text}}
+                                        <a class="close_btn" href="" ng-click="removeCompany($index)">×</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+
+
+                    <!--<div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input id="doanhnghiep" type="radio" ng-model="target.objectGroup" value="1" checked />
+                                <label for="doanhnghiep">Nhóm theo doanh nghiệp</label><br />
+                                <input id="haiquan" type="radio" ng-model="target.objectGroup" value="2" />
+                                <label for="haiquan">Nhóm theo đơn vị HQ</label><br />
+                                <input id="sophieu" type="radio" ng-model="target.objectGroup" value="3" />
+                                <label for="sophieu">Nhóm theo số phiếu</label>
+                            </div>
+                        </div>
+                    </div>-->
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" ng-disabled="tagCompanies.length == 0 && tagUnitUsers.length == 0" prevent-default ng-click="report()">Báo cáo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" ng-disabled="tagCompanies.length == 0 && tagUnitUsers.length == 0" prevent-default ng-click="printExcel()">Xuất Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

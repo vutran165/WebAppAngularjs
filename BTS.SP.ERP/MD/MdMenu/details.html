@@ -1,0 +1,41 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close" ></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Menu Cha</label><span style="color: red"> (2*)</span>
+                    <input type="text" class="form-control" ng-model="target.maCha" maxlength="200" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Mã Menu</label><span style="color: red"> (3*)</span>
+                    <input type="text" class="form-control" ng-model="target.maMenu" name="_ma" maxlength="50" disabled>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên menu</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.tenMenu" maxlength="50" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Số thứ tự</label><span style="color: red"> (5*)</span>
+                    <input type="text" class="form-control" ng-model="target.sort" maxlength="300" disabled>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Trạng thái</label><span style="color: red"> (6*)</span>
+                    <input type="text" class="form-control" ng-model="target.trangThai" disabled>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span>&ensp;{{config.label.btnCancel}}</button>
+    </div>
+</div>

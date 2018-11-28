@@ -1,0 +1,93 @@
+﻿
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary" ng-form name="_form">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-bookmark"></span> Báo cáo quyết toán
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Đơn vị</label>
+                                    <select class="form-control" ng-model="target.maDoanhNghiep" ng-options="opt.value as opt.text for opt in tempData.companies" required>
+                                        <option value="">-</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+
+                                    <label>Năm</label>
+
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="number" ng-model="target.year" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label">So sánh với hệ thống</label>&nbsp;&nbsp;&nbsp;
+                                            <input type="checkbox" class="form-check-input" ng-model="target.checked"  />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-md-2 col-md-offset-10"> -->
+                                <!-- <div class="form-group"> -->
+                                <!-- <button class="btn btn-primary form-control" ng-disabled="_form.$invalid" prevent-default ng-click="report()">Báo cáo</button> -->
+                                <!-- </div> -->
+                                <!-- </div> -->
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nhóm hàng hóa</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagMerchandiseGroups" class="tag label label-success">
+                                            {{item.value}}
+                                            <a class="close" href="" ng-click="removeMerchandiseGroup($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectMerchandiseGroup()">Nhóm</button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-2 col-md-offset-10">
+                                <div class="form-group">
+                                    <button class="btn btn-primary form-control" ng-disabled="_form.$invalid" prevent-default ng-click="report()">Báo cáo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

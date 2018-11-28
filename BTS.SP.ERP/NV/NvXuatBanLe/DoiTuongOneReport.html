@@ -1,0 +1,38 @@
+<tr>
+    <td colspan="2">
+        <div class="label-info-report">Số hộ chiếu/Số Giấy thông hành:</div>
+        <span>
+            &nbsp;{{target.hoChieuCmNd}}
+        </span>
+    </td>
+    <td colspan="2">
+        <div class="label-info-report">Quốc tịch:</div>
+        <span>&nbsp;{{target.tenQuocTich}}</span>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        <div class="label-info-report">Tên tàu:</div>
+        <span>
+            &nbsp;{{target.tenTau}}
+        </span>
+    </td>
+    <td colspan="2">
+        <div class="label-info-report">Số hiệu chuyến bay:</div>
+        <span>&nbsp;{{target.soHieuChuyenBay}}</span>
+    </td>
+</tr>
+<tr>
+    <td colspan="2">
+        <div class="label-info-report">Ngày bay/ngày khởi hành:</div>
+        <span>
+            &nbsp;{{target.ngayDi | date : "dd/MM/yyyy"}}
+        </span>
+    </td>
+    <td colspan="2">
+        <div class="label-info-report">Ngày tàu đến cảng:</div>
+        <span>
+            &nbsp;{{target.ngayDen | date : "dd/MM/yyyy"}}
+        </span>
+    </td>
+</tr>

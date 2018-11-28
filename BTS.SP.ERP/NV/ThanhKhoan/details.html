@@ -1,0 +1,182 @@
+﻿
+<form></form><!-- KHông hiểu sao để thế này thì nó mới không bị lỗi T_T-->
+<div>
+    <div class="modal-header" style="padding: 5px 5px">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="md-style-label-input">
+                        Số tờ khai
+                    </div>
+                    <div class="md-4-style-input">
+                        <input class="input-border-form" type="text" name="_maHoaDon" ng-model="target.soToKhai" maxlength="50" disabled />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-style-label-input">
+                        Số tờ khai đầu tiên
+                    </div>
+                    <div class="md-4-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" type="text" ng-model="target.soToKhaiDauTien" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="md-style-label-input">
+                        Loại hình tờ khai
+                    </div>
+                    <div class="md-4-style-input">
+                        <input class="input-border-form" type="text" name="_maHoaDon" ng-model="target.maLoaiHinh" maxlength="50" disabled />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-style-label-input">
+                        Số tờ khai nhánh
+                    </div>
+                    <div class="md-4-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" name="_ngoaiTe" type="text" ng-model="target.soToKhaiNhanh" disabled />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="md-style-label-input">
+                        Ngày đăng ký
+                    </div>
+                    <div class="md-4-style-input">
+                        <input class="input-border-form" type="text" name="_maHoaDon" ng-model="target.ngayTK" maxlength="50" placeholder="{{config.dateFormat}}"
+                               uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayct" readonly datepicker-localdate />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-style-label-input">
+                        Ngày cấp phép
+                    </div>
+                    <div class="md-4-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" type="text" ng-model="target.ngayCapPhep" placeholder="{{config.dateFormat}}"
+                                   uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayct" readonly datepicker-localdate />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="md-style-label-input">
+                        Đơn vị hải quan
+                    </div>
+                    <div class="md-4-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" type="text" ng-model="target.tenHaiQuan" disabled/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="md-style-label-input">
+                        Người nhập khẩu(doanh nghiệp)
+                    </div>
+                    <div class="md-4-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" name="_ngoaiTe" type="text" ng-model="target.tenDoanhNghiep" disabled/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="md-style-label-input">
+                        Người thanh khoản
+                    </div>
+                    <div class="md-4-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" name="_soHoaDon" type="text" ng-model="target.userName" disabled />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="md-style-label-input">
+                        Ngày thanh khoản
+                    </div>
+                    <div class="md-4-style-input">
+                        <div class="add-input-zone">
+                            <input class="input-border-form" type="text" ng-model="target.ngayThanhKhoan" placeholder="{{config.dateFormat}}"
+                                   uib-datepicker-popup="{{config.dateFormat}}" datepicker-localdate disabled />
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-body">
+        <table class="table table-bordered table-hover table-condensed" arrow-selector data-item-target="dataDetails">
+            <thead>
+                <tr>
+                    <th style="width:3%" class="text-center">STT</th>
+                    <th style="width:10%" class="text-center">Mã HS</th>
+                    <th style="width:37%" class="text-center">Mô tả HS</th>
+                    <th style="width:10%" class="text-center">Mã quốc gia</th>
+                    <th style="width:10%" class="text-center">Số lượng hàng </th>
+                    <!--<th style="width:10%" class="text-center">Số lượng hàng 2</th>-->
+                    <th style="width:10%" class="text-center">Đơn giá</th>
+                    <th style="width:10%" class="text-center">Trị giá</th>
+                </tr>
+            </thead>
+            <tbody ng-form name="_formDetail">
+                <tr ng-if="isLoading">
+                    <td colspan="14"><my-loading></my-loading></td>
+                </tr>
+                <tr ng-repeat="item in target.dataDetails track by $index">
+                    <td style="text-align:center;">{{$index + 1}}</td>
+                    <td>
+                        {{item.mahs}}
+                    </td>
+                    <td>
+                        {{item.moTaHang}}
+                    </td>
+                    <td>
+                        {{item.maXuatXu}}
+                    </td>
+                    <td style="text-align:center;">
+                        {{item.soLuong | number}}
+                    </td>
+                    <!--<td style="text-align:center;">
+                        {{item.soLuong2 | number}}
+                    </td>-->
+                    <td style="text-align:right;">
+                        {{item.donGia | number}}
+                    </td>
+                    <td style="text-align:right;">
+                        {{item.triGia | number}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-primary" ng-if="target.trangThai == 20" ng-click="liquited()">Thanh Khoản</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>
+

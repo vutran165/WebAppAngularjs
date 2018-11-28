@@ -1,0 +1,93 @@
+﻿
+<form></form>
+<!-- KHông hiểu sao để thế này thì nó mới không bị lỗi T_T-->
+<div>
+    <div class="modal-header">
+        <h3 class="modal-title">Công thức giá thành</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_formThu" class="form-validation">
+            <div class="form-group">
+                <div class="row">
+                    <div class="span-md-2">
+                        Mã<span style="color:red">(1*)</span>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="input-border-form" type="text" ng-model="target.code" disabled />
+                    </div>
+                    <div class="span-md-2">
+                        Tên<span style="color:red">(2*)</span>
+                    </div>
+                    <div class="col-md-4">
+                        <input class="input-border-form" type="text" ng-model="target.name" disabled />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-body" style="padding: 10px 15px">
+        <uib-tabset active="active">
+            <uib-tab index="0" heading="Công thức nguyên liệu">
+                <div>
+                    <form name="_tableForm">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-condensed" arrow-selector data-item-target="dataDetails">
+                                <thead>
+                                    <tr>
+                                        <th style="width:3%" class="text-center">TT</th>
+                                        <th style="width:50%" class="text-center">Tên hàng</th>
+                                        <th style="width:10%" class="text-center">Số lượng</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in target.dataDetails" enter-key="addRow()" delete-key="removeRow(item)">
+                                        <td style="text-align:center">{{$index + 1}}</td>
+                                        <td>
+                                            <input autocomplete="off" type="text" style="width:100%;" name="_maHang_{{$index}}" ng-model="item.maHang" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.merchandises | filter:$viewValue" typeahead-input-formatter="formatLabel($model, 'merchandises')" disabled />
+                                        </td>
+                                        <td>
+                                            <input format-number-input="number" ng-model="item.soLuong" style="width:100%; text-align:center" disabled/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Mặt hàng sản xuất">
+                <div>
+                    <form name="_tableForm">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-condensed" arrow-selector data-item-target="dataDetails">
+                                <thead>
+                                    <tr>
+                                        <th style="width:3%" class="text-center">TT</th>
+                                        <th style="width:50%" class="text-center">Thành phẩm</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="item in target.dataProductDetails" enter-key="addRowEx()" delete-key="removeRowEx(item)">
+                                        <td style="text-align:center">{{$index + 1}}</td>
+                                        <td>
+                                            <input autocomplete="off" type="text" style="width:100%;" name="_maHang_{{$index}}" ng-model="item.maHang" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.merchandises | filter:$viewValue" typeahead-input-formatter="formatLabel($model, 'merchandises')" disabled />
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+    <div class="form-group">
+        <label style="color:red; font:bold" class="control-label col-md-4 col-md-offset-8">Tổng: {{target.tong | number}}</label>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

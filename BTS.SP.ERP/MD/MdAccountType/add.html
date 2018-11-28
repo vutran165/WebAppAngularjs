@@ -1,0 +1,39 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+        <div class="button-close"  ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã loại tài khoản</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.maLoaiTk" name="_maLoaiTk" maxlength="50" required>
+                    <span style="color:red" ng-show="_form._maLoaiTk.$dirty && _form._maLoaiTk.$invalid">
+                        <span ng-show="_form._maLoaiTk.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên loại tài khoản</label><span style="color: red"> (2*)</span>
+                    <input type="text" class="form-control" ng-model="target.tenLoaiTk" name="_tenLoaiTaiKhoan" maxlength="300" required>
+                    <span style="color:red" ng-show="_form._tenLoaiTaiKhoan.$dirty && _form._tenLoaiTaiKhoan.$invalid">
+                        <span ng-show="_form._tenLoaiTaiKhoan.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Trạng thái</label>
+                    <select class="form-control" ng-model="target.trangThai" ng-init="target.trangThai = 10" ng-options="opt.value as opt.text for opt in tempData.status"></select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

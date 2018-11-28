@@ -1,0 +1,55 @@
+<div class="form-group row">
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Số hộ chiếu
+        </div>
+        <div class="md-4-style-input">
+            <div class="add-input-zone">
+                <input class="input-border-form" name="_soHd" type="text" ng-model="target.hoChieuCmNd" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Quốc tịch
+        </div>
+        <div class="md-4-style-input">
+            <input class="input-border-form" name="_quyDoi" type="text" ng-model="target.quocTich" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.quocgias | filter:$viewValue" typeahead-input-formatter="formatLabel($model, 'quocgias')" />
+        </div>
+    </div>
+</div>
+<div class="form-group row">
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Số hiệu tàu
+        </div>
+        <div class="md-4-style-input">
+            <div class="add-input-zone">
+                <input class="input-border-form" name="_ngoaiTe" type="text" ng-model="target.soHieuChuyenBay" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Ngày tàu nhập cảnh
+        </div>
+        <div class="md-4-style-input">
+            <input style="line-height:inherit;width:100%" class="input-border-form" ng-model="target.ngayDen" type="date" datepicker-localdate />
+        </div>
+    </div>
+</div>
+
+
+<!--<div class="form-group row">
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Số sổ <span style="color: red">(*)</span>
+        </div>
+        <div class="md-4-style-input">
+            <input class="input-border-form" name="_soSo" type="text" ng-model="target.soSo" required />
+            <span style="color:red" ng-show="_form._soSo.$dirty && _form._soSo.$invalid">
+                <span ng-show="_form._soSo.$error.required">Không được để trống</span>
+            </span>
+        </div>
+    </div>
+</div>-->

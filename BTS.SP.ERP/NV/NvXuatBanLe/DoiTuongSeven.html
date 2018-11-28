@@ -1,0 +1,48 @@
+<div class="form-group row">
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Số hộ chiếu/Số Giấy thông hành/Số thẻ đi bờ
+        </div>
+        <div class="md-4-style-input">
+            <div class="add-input-zone">
+                <input class="input-border-form" name="_soHd" type="text" ng-model="target.hoChieuCmNd" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Quốc tịch
+        </div>
+        <div class="md-4-style-input">
+            <input class="input-border-form" name="_quyDoi" type="text" ng-model="target.quocTich" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.quocgias | filter:$viewValue" />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Tên tàu
+        </div>
+        <div class="md-4-style-input">
+            <input class="input-border-form" name="abc" type="text" ng-model="target.tenTau" />
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Ngày khởi hành
+        </div>
+        <div class="md-4-style-input">
+            <input style="line-height:inherit;width:100%" class="input-border-form" ng-model="target.ngayDi" type="date" datepicker-localdate />
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Ngày tàu đến cảng
+        </div>
+        <div class="md-4-style-input">
+            <input style="line-height:inherit;width:100%" class="input-border-form" ng-model="target.ngayDen" type="date" datepicker-localdate />
+        </div>
+    </div>
+</div>
+

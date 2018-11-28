@@ -1,0 +1,327 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="button-close" ng-click="goIndex()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-default" prevent-default title="In danh sách" ng-click="print()"><span class="glyphicon glyphicon-print"></span>&ensp;In</button>
+
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="main-report">
+            <br />
+            <style>
+                #dataTable {
+                    width: 1000px;
+                }
+
+                .date-time,
+                th,
+                td,
+                span {
+                    font-size: 14px;
+                    font-family: 'Times New Roman';
+                }
+
+                th,
+                td {
+                    padding: 2px;
+                }
+
+                .header-report {
+                    margin-bottom: 30px;
+                }
+
+                    .header-report table,
+                    .infor-report table {
+                        width: 100%;
+                        padding-left: 20px;
+                        border: 0;
+                    }
+
+                .infor-report {
+                    padding-left: 10px;
+                }
+
+                .data-report table {
+                    width: 100%;
+                    border: 1px solid;
+                    border-collapse: collapse;
+                }
+
+                    .data-report table thead tr th,
+                    .data-report table tbody.data-detail tr td {
+                        border: 1px solid;
+                    }
+
+                    .data-report table tbody.data-detail tr td {
+                        font-size: 13px !important;
+                    }
+
+                .infor-report table tr td {
+                    position: relative;
+                }
+
+                .dotted-description {
+                    position: absolute;
+                    width: calc(100% - 110px);
+                    border-bottom: 1px dotted;
+                }
+
+                .signature-place table {
+                    width: 100%;
+                }
+
+                .signature-place .date-time {
+                    float: right;
+                    font-style: italic;
+                    padding: 10px 30px 5px 10px;
+                }
+
+                .signature-place table thead tr th {
+                    text-align: center;
+                }
+
+                .signature-place table tbody tr td {
+                    text-align: center;
+                }
+
+                .end-page {
+                    height: 100px;
+                }
+
+                .label-info-report {
+                    float: left;
+                    font-weight: bold;
+                }
+
+                .info-company-top-left {
+                    float: left;
+                    text-align: left;
+                    font-weight: bold;
+                }
+
+                .info-datereport-top-right {
+                    float: right;
+                    text-align: right;
+                    font-style: italic;
+                }
+
+                .name-report {
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 22px !important;
+                    padding: 5px;
+                }
+
+                .info-contract-attachment {
+                    text-align: center;
+                    font-style: italic;
+                }
+
+                .text-center {
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .name-tong-hop {
+                    text-align: right;
+                    font-weight: bold;
+                }
+
+                .value-tong-hop {
+                    font-weight: bold;
+                    text-align: right;
+                }
+            </style>
+
+            <div id="dataTable">
+
+                <div class="header-report">
+                    <table>
+                        <tr>
+                            <td class="info-company-top-left">
+                                <!--{{target.tenDonVi}}
+                                <br>{{target.diaChiDonVi}}-->
+                                TỔNG CỤC HẢI QUAN
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row name-report">
+                        THÔNG TIN DOANH NGHIỆP
+                    </div>
+
+                </div>
+                <div class="infor-report">
+                    <table style="padding-left: 15px;">
+                        <tr>
+                            <td colspan="4">
+                                <div class="label-info-report">Tên doanh nghiệp:</div>
+                                <span>&nbsp;{{target.tenDoanhNghiep}}</span>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <div class="label-info-report">Mã số thuế:</div>
+                                <span>&nbsp;{{target.maSoThue}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="label-info-report">Điện thoại:</div>
+                                <span>&nbsp;{{target.soDienThoai}}</span>
+                            </td>
+                            <td colspan="2">
+                                <div class="label-info-report">Số Fax:</div>
+                                <span>&nbsp;{{target.soFax}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+
+                            <td colspan="4">
+                                <div class="label-info-report">Địa chỉ:</div>
+                                <span>&nbsp;{{target.diaChi}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <div class="label-info-report">Email:</div>
+                                <span>&nbsp;{{target.email}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <div class="label-info-report">Đơn vị HQ quản lý:</div>
+                                <span>&nbsp;{{target.tenHaiQuan}}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <div class="label-info-report">Họ tên người liên hệ:</div>
+                                <span>&nbsp;{{target.hoTenNguoiLienHe}}</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="data-report">
+                <p style="font-weight: bold">1. Danh sách cửa hàng</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 2%">STT</th>
+                            <th class="text-center" style="width: 8%">Mã cửa hàng</th>
+                            <th class="text-center" style="width: 15%">Tên cửa hàng</th>
+                            <th class="text-center" style="width: 20%">Loại hình cửa hàng</th>
+                            <th class="text-center" style="width: 20%">Mã đối tượng</th>
+                            <th class="text-center" style="width: 10%">Đơn vị HQ Quản lý</th>
+                            <th class="text-center" style="width: 8%">Người liên hệ</th>
+                            <th class="text-center" style="width: 5%">Số điện thoại</th>
+                            <th class="text-center" style="width: 12%">Địa chỉ</th>
+                        </tr>
+                    </thead>
+                    <tbody class="data-detail">
+                        <tr ng-repeat="item in target.danhSachCuaHang">
+                            <td style="text-align: center;">{{$index + 1}}</td>
+                            <td>
+                                {{item.maDonVi}}
+                            </td>
+                            <td>
+                                {{item.tenDonVi}}
+                            </td>
+                            <td>
+                                <table>
+                                    <tr ng-repeat="x in lstLoaiHinh">
+                                        -{{x}}
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table>
+                                    <tr ng-repeat="y in lstDoiTuong">
+                                        -{{y}}
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                {{item.donViHaiQuanChuQuan}}
+                            </td>
+                            <td>
+                                {{item.hoTenNguoiLienHe}}
+                            </td>
+                            <td>
+                                {{item.soDienThoai}}
+                            </td>
+                            <td>
+                                {{item.diaChiDonVi}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <br>
+                <div class="data-report">
+                    <p style="font-weight: bold; padding-top: 15px;">2. Danh sách kho</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 2%">STT</th>
+                                <th class="text-center" style="width: 8%">Mã kho</th>
+                                <th class="text-center" style="width: 15%">Tên kho</th>
+                                <th class="text-center" style="width: 20%">Loại hình cửa hàng</th>
+                                <th class="text-center" style="width: 20%">Mã đối tượng</th>
+                                <th class="text-center" style="width: 10%">Đơn vị HQ Quản lý</th>
+                                <th class="text-center" style="width: 8%">Người liên hệ</th>
+                                <th class="text-center" style="width: 5%">Số điện thoại</th>
+                                <th class="text-center" style="width: 12%">Địa chỉ</th>
+                            </tr>
+                        </thead>
+                        <tbody class="data-detail">
+                            <tr ng-repeat="item in target.danhSachKho">
+                                <td style="text-align: center;">{{$index + 1}}</td>
+                                <td>
+                                    {{item.maKho}}
+                                </td>
+                                <td>
+                                    {{item.tenKho}}
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr ng-repeat="x in lstLoaiHinh">
+                                            -{{x}}
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    <table>
+                                        <tr ng-repeat="y in lstDoiTuong">
+                                            -{{y}}
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td>
+                                    {{target.tenHaiQuan}}
+                                </td>
+                                <td>
+                                    {{item.hoTenNguoiLienHe}}
+                                </td>
+                                <td>
+                                    {{item.soDienThoaiLienHe}}
+                                </td>
+                                <td>
+                                    {{item.diaChi}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class=end-page></div>
+            </div>
+        </div>
+    </div>
+</div>

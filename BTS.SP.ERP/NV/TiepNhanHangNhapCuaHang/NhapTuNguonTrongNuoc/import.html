@@ -1,0 +1,41 @@
+﻿<div>
+    <div>
+        <div class="modal-header">
+            <h3 class="modal-title">{{title()}}</h3>
+            <div class="button-close" ng-click="cancel()">
+                <i class="glyphicon glyphicon-remove x-close"></i>
+            </div>
+        </div>
+        <div class="modal-body" ng-form name="_form">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-4" ng-show="isLoading">
+                        <my-loading></my-loading>
+                    </div>
+                    <div class="col-md-4" ng-show="!isLoading">
+                        <form name="form">
+                            <button type="file" ngf-select ng-model="file" name="file">
+                                Select File
+                            </button>
+
+                            <p>File:{{file.name}}</p>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="file==null" ng-click="import()">Import</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

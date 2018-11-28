@@ -1,0 +1,56 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close" ></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên đơn vị</label><span style="color: red"> (1)</span>
+                    <textarea type="text" class="form-control" ng-model="target.unitName" name="_unitName"></textarea>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên Giám đốc</label><span style="color: red"> (2*)</span>
+                    <textarea type="text" class="form-control" ng-model="target.directorName" name="_directorName" required></textarea>
+                    <span style="color:red" ng-show="_form._directorName.$dirty && _form._directorName.$invalid">
+                        <span ng-show="_form._directorName.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên kế toán trưởng</label><span style="color: red"> (3)</span>
+                    <textarea type="text" class="form-control" ng-model="target.chiefAccountantName" name="_chiefAccountantName"></textarea>
+                </div>
+                <div class="col-lg-6">
+                    <label>Văn bản, thông tư</label><span style="color: red"> (4*)</span>
+                    <textarea type="text" class="form-control" ng-model="target.document" name="_document" required></textarea>
+                    <span style="color:red" ng-show="_form._document.$dirty && _form._document.$invalid">
+                        <span ng-show="_form._document.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Ngày hiệu lực</label><span style="color: red"> (5)</span>
+                    <div class="input-group ">
+                        <input type="text" class="form-control" ng-model="target.effectDate" placeholder="{{config.dateFormat}}"
+                               uib-datepicker-popup="{{config.dateFormat}}" is-open="EffectDate" datepicker-localdate/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="EffectDate = !EffectDate; config.delegateEvent($event);">
+                                <i class="glyphicon glyphicon-calendar"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary"ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

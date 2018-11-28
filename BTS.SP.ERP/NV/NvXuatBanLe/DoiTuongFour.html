@@ -1,0 +1,129 @@
+<!--<div class="form-group row">
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Số sổ <span style="color: red">(*)</span>
+        </div>
+        <div class="md-4-style-input">
+            <input class="input-border-form" name="_soSo" type="text" ng-model="target.soDinhMuc.soSo" required/>
+            <span style="color:red" ng-show="_form._soSo.$dirty && _form._soSo.$invalid">
+                <span ng-show="_form._soSo.$error.required">Không được để trống</span>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Chứng minh nhân dân số
+        </div>
+        <div class="md-4-style-input">
+            <div class="add-input-zone">
+                <input class="input-border-form" name="_soHd" type="text" ng-model="target.soDinhMuc.chungMinhNhanDan" />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Chức vụ
+        </div>
+        <div class="md-4-style-input">
+            <input class="input-border-form" name="_quyDoi" type="text" ng-model="target.soDinhMuc.chucVu" />
+        </div>
+    </div>
+</div>
+
+<div class="form-group row">
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Cơ quan
+        </div>
+        <div class="md-4-style-input">
+            <input class="input-border-form" name="_quyDoi" type="text" ng-model="target.soDinhMuc.coQuan" />
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Từ ngày
+        </div>
+        <div class="md-4-style-input">
+            <div class="add-input-zone">
+                <input style="line-height:inherit;width:100%" class="input-border-form" name="_ngoaiTe" ng-model="target.soDinhMuc.tuNgay" type="date" datepicker-localdate />
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Đến ngày
+        </div>
+        <div class="md-4-style-input">
+            <input style="line-height:inherit;width:100%" class="input-border-form" ng-model="target.soDinhMuc.denNgay" type="date" datepicker-localdate />
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-md-8">Tiêu chuẩn mua hàng miễn thuế :</div>
+    <table class="data-detail table table-bordered">
+        <thead>
+            <tr>
+                <th style="width:15%">Tên hàng hóa</th>
+                <th style="width:15%">Số lượng</th>
+                <th style="width:15%">Đơn vị tính</th>
+                <th style="width:5%">Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr style="text-align:center">
+                <td>
+                    <input class="input-border-form" style="width:100%;" ng-model="newItem2.tenHang">
+                </td>
+                <td>
+                    <input class="input-border-form" type="number" min="0" style="width:100%" ng-model="newItem2.soLuong">
+                </td>
+                <td>
+                    <input class="input-border-form" style="width:100%" ng-model="newItem2.donViTinh">
+                </td>
+                <td style="text-align:center">
+                    <a ng-click="addToOrderSoDinhMuc(newItem2)"><span class="glyphicon glyphicon-plus" style="color:#0026ff;"></span></a>
+                </td>
+            </tr>
+            <tr style="text-align:center" ng-repeat="item2 in target.soDinhMuc.detailSoDinhMuc track by $index">
+                <td>
+                    <input class="input-border-form" style="width:100%;" ng-model="item2.tenHang" disabled>
+                </td>
+                <td>
+                    <input class="input-border-form" type="number" min="0" style="width:100%" ng-model="item2.soLuong" disabled>
+                </td>
+                <td>
+                    <input class="input-border-form" style="width:100%" ng-model="item2.donViTinh" disabled>
+                </td>
+                <td style="text-align:center">
+                    <a ng-click="removeToOrderSoDinhMuc($index)"><span class="glyphicon glyphicon-remove" style="color:#FF0000;"></span></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="panel-footer">
+        <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged2.currentPage"
+                        ng-change="pageChangedSoDinhMuc()"
+                        items-per-page="paged2.itemsPerPage" ng-if="paged2.totalItems > 0" total-items="paged2.totalItems" max-size="paged2.pageSize"
+                        boundary-links="true" num-pages="paged2.totalPage"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+        </uib-pagination>
+    </div>
+
+</div>-->
+
+
+<div class="form-group row">
+    <div class="col-md-4">
+        <div class="md-style-label-input">
+            Số sổ định mức<span style="color: red">(*)</span>
+        </div>
+        <div class="md-4-style-input">
+            <input class="input-border-form" name="_soSo" type="text" ng-model="target.soSo" required ng-disabled="isDisable"/>
+            <span style="color:red" ng-show="_form._soSo.$dirty && _form._soSo.$invalid">
+                <span ng-show="_form._soSo.$error.required">Không được để trống</span>
+            </span>
+        </div>
+    </div>
+</div>

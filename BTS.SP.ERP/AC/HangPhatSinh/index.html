@@ -1,0 +1,336 @@
+﻿<style>
+            .btn {
+        padding: 6px 6px !important;
+        line-height: 0.7 !important;
+    }
+
+    .label-success {
+        background-color: #f5f5f5;
+        color: #666;
+        border: 1px solid #d9d9d9;
+    }
+
+    .label {
+        display: block !important;
+        margin-bottom: 8px !important;
+        float: left !important;
+        font-size: 13px !important;
+        margin-right: 10px !important;
+        font-weight: normal !important;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        border-top: 0px !important;
+    }
+
+    .style-baocao {
+        float: left !important;
+        /*width: 400px !important;*/
+        height: 32px !important;
+    }
+
+    .close_btn {
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1;
+        color: #000 !important;
+        text-shadow: 0 1px 0 #fff;
+        filter: alpha(opacity=20);
+        opacity: .5;
+    }
+
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-bookmark"></span> Báo cáo hàng phát sinh
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label>Ngày hạch toán:  </label></td>
+                                <td col="2">
+
+                                    <label style="float:left; margin-right:10px;">Từ ngày</label>
+                                    <div class="add-input-zone" style="float:left;">
+                                        <input class="input-border-form" type="text" ng-model="target.fromDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="fromDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="fromDate = !fromDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+
+                                    <label style="float:left; margin-right:10px; margin-left:50px;">Đến ngày</label>
+                                    <div class="add-input-zone" style="float:left;">
+                                        <input class="input-border-form" type="text" ng-model="target.toDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="toDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="toDate = !toDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px; line-height: 30px;"><label class="control-label">Đơn vị Hải quan: </label></td>
+                                <td colspan="2">
+                                    <input type="text" ng-model="filtered.advanceData.maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)" style="float: left; width: 80px; height: 32px; border: 1px solid #ccc; border-radius: 5px; margin-right: 8px;" />
+                                    <div style="float: left; width: 420px;">
+                                        <select class="form-control style-baocao" ng-options="opt.value as opt.description for opt in tempData.donViHaiQuans" ng-model="filtered.advanceData.maHaiQuan" name="_maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)">
+                                            <option value="" style="float: left; text-align: center;">----------- Lựa chọn đơn vị hải quan -----------</option>
+                                        </select>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label class="control-label">Doanh nghiệp: </label></td>
+                                <td><button type="button" class="btn btn-primary" ng-click="selectCompany()">Chọn</button></td>
+                                <td>
+                                    <div ng-repeat="item in tagCompanies" class="tag label label-success">
+                                        {{item.text}}
+                                        <a class="close_btn" href="" ng-click="removeCompany($index)">×</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label class="control-label">Cửa hàng: </label></td>
+                                <td><button type="button" class="btn btn-primary" ng-click="selectUnitUser()">Chọn</button></td>
+                                <td>
+                                    <div ng-repeat="item in tagUnitUsers" class="tag label label-success">
+                                        {{item.text}}
+                                        <a class="close_btn" href="" ng-click="removeUnitUser($index)">×</a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label class="control-label">Kho hàng: </label></td>
+                                <td><button type="button" class="btn btn-primary" ng-click="selectWareHouse()">Chọn</button></td>
+                                <td>
+                                    <div ng-repeat="item in tagWareHouses" class="tag label label-success">
+                                        {{item.text}}
+                                        <a class="close_btn" href="" ng-click="removeWareHouse($index)">×</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label class="control-label">Mã HS: </label></td>
+                                <td><button type="button" class="btn btn-primary" ng-click="selectMerchandiseGroup()">Chọn</button></td>
+                                <td>
+                                    <div ng-repeat="item in tagMerchandiseGroups" class="tag label label-success">
+                                        {{item.value}}
+                                        <a class="close_btn" href="" ng-click="removeMerchandiseGroup($index)">×</a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:100%;" colspan="3">
+                                    <div class="form-group col-md-6">
+                                        <label>Hộ chiếu\Số CMND</label>
+                                        <input type="text" class="form-control" ng-model="target.maKH" name="_maDoanhNghiep" uib-typeahead="opt.value as opt.text for opt in tempData.customers | filter: $viewValue">
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label>Khách Hàng</label>
+                                        <input type="text" class="form-control" ng-model="target.tenKhachHang" name="_tenKhachHang" ng-value="displayHelper(target.maKH,'customers')" disabled>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!--<div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{data.tenHaiQuan}}</label>
+                                <div class="tags">
+                                    <div ng-repeat="item in tagDonViHaiQuans" class="tag label label-success">
+                                        {{item.tenHaiQuan}}
+                                        <a class="close" href="" ng-click="removeDonViHaiQuan($index)">×</a>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" ng-click="selectDonViHaiQuan()">Hải Quan</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Từ ngày</label>
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="target.fromDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="fromDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="fromDate = !fromDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Đến ngày</label>
+                                    <div class="add-input-zone">
+                                        <input class="input-border-form" type="text" ng-model="target.toDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="toDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="toDate = !toDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Đơn vị HQ</label>
+                                <select class="form-control" ng-model="target.maHaiQuan" ng-options="opt.value as opt.text for opt in tempData.donViHaiQuans">
+                                    <option value="">-</option>
+                                </select>
+                            </div>
+                        </div> 
+
+                    <!--</div>
+                    <div class="row">-->
+                        <!-- <div class="col-md-2">
+                            <div class="form-group">
+                                <label>MST Doanh nghiệp</label>
+                                <input type="text" class="form-control" ng-model="target.maDoanhNghiep" name="_maDoanhNghiep" uib-typeahead="opt.value as opt.text for opt in tempData.companies | filter: $viewValue">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Tên doanh nghiệp</label>
+                                <input type="text" class="form-control" name="_tenDoanhNghiep" ng-model="target.tenDoanhNghiep" ng-value="displayHelper(target.maDoanhNghiep,'companies')" disabled>
+                            </div>
+                        </div> -->
+                        <!--<div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Doanh nghiệp</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagCompanies" class="tag label label-success" name="_maDoanhNghiep" ng-model="target.maDoanhNghiep">
+                                            {{item.text}}
+                                            <a class="close" href="" ng-click="removeCompany($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectCompany()">Doanh Nghiệp</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Cửa hàng</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagUnitUsers" class="tag label label-success">
+                                            {{item.text}}
+                                            <a class="close" href="" ng-click="removeUnitUser($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectUnitUser()">Cửa hàng</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Kho hàng</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagWareHouses" class="tag label label-success">
+                                            {{item.text}}
+                                            <a class="close" href="" ng-click="removeWareHouse($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectWareHouse()">Kho hàng</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Hộ chiếu\Số CMND</label>
+                                    <input type="text" class="form-control" ng-model="target.maKH" name="_maDoanhNghiep" uib-typeahead="opt.value as opt.text for opt in tempData.customers | filter: $viewValue">
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Khách Hàng</label>
+                                    <input type="text" class="form-control" ng-model="target.tenKhachHang" name="_tenKhachHang" ng-value="displayHelper(target.maKH,'customers')" disabled>
+                                </div>
+                            </div>-->
+                            <!--<div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Đối tượng</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagDoiTuongs" class="tag label label-success">
+                                            {{item.value}}
+                                            <a class="close" href="" ng-click="removeDoiTuong($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectDoiTuong()">Đối tượng</button>
+                                </div>
+                            </div>-->
+                            <!--<div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Mã HS</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagMerchandiseGroups" class="tag label label-success">
+                                            {{item.value}}
+                                            <a class="close" href="" ng-click="removeMerchandiseGroup($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectMerchandiseGroup()">Nhóm</button>
+                                </div>
+                            </div>-->
+                            <!--<div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Mã Hàng hóa</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagMerchandises" class="tag label label-success">
+                                            {{item.value}}
+                                            <a class="close" href="" ng-click="removeMerchandise($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectMerchandise()">Mã hàng</button>
+                                </div>
+                            </div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input id="kho" type="radio" ng-model="target.objectGroup" value="1" checked />
+                                <label for="kho">Nhóm theo số phiếu</label></br>
+                                <input id="haiquan" type="radio" ng-model="target.objectGroup" value="2" />
+                                <label for="haiquan">Nhóm theo đơn vị HQ</label></br>
+                                <input id="doanhnghiep" type="radio" ng-model="target.objectGroup" value="3" />
+                                <label for="doanhnghiep">Nhóm theo doanh nghiệp</label></br>
+                                <input id="mahs" type="radio" ng-model="target.objectGroup" value="4" />
+                                <label for="mahs">Nhóm theo mã HS</label></br>
+                                <input id="kho" type="radio" ng-model="target.object    Group" value="5" />
+                                <label for="s">Nhóm theo số tờ khai</label>
+                            </div>
+                        </div>
+
+                    </div>-->
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" prevent-default ng-click="report()">Báo cáo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" prevent-default ng-click="exportToExcel()">Xuất Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

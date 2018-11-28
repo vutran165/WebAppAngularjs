@@ -1,0 +1,119 @@
+﻿<form></form><!-- KHông hiểu sao để thế này thì nó mới không bị lỗi T_T-->
+<style>
+    #myWorkContent {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+</style>
+<div>
+    <div>
+        <div class="modal-header">
+            <h3 class="modal-title">{{title()}}</h3>
+            <div class="button-close" ng-click="cancel()">
+                <i class="glyphicon glyphicon-remove x-close"></i>
+            </div>
+        </div>
+        <div class="modal-body" ng-form name="_form">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Người gửi
+                        </div>
+                        <div class="md-4-style-input">
+                            <input class="input-border-form" type="text" ng-model="target.nguoiGui" maxlength="100" name="_nguoiGui" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Đơn vị gửi
+                        </div>
+                        <div class="md-4-style-input">
+                            <input class="input-border-form" type="text" ng-model="target.tenDonViGui" maxlength="100" name="_donViGui" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Ngày gửi
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="target.ngayGui" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayGui" datepicker-localdate />
+                                <div class="button-calender" ng-click="_ngayGui =!_ngayGui; config.delegateEvent($event);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Cán bộ hỗ trợ
+                        </div>
+                        <div class="md-4-style-input">
+                            <input class="input-border-form" type="text" ng-model="target.canBoHoTro" maxlength="100" name="_canBoHoTro" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Đơn vị nhận
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_donViNhan" type="text" typeahead-editable="false" uib-typeahead="opt.id as opt.text for opt in tempdata.donViHaiQuans | filter:$viewValue | limitTo:15" ng-model="target.donViNhan" typeahead-input-formatter="formatLabel($model, 'donViHaiQuans')" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Ngày hỗ trợ
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="target.ngayHoTro" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayHoTro" datepicker-localdate />
+                                <div class="button-calender" ng-click="_ngayHoTro =!_ngayHoTro; config.delegateEvent($event);"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-style-label-input">
+                            Nội dung hỏi
+                        </div>
+                    </div>
+                    <div class="md-12-style-input">
+                        <div class="add-input-zone">
+                            <textarea class="input-border-form" type="text" rows="4" ng-model="target.noiDungHoi" style="width:100%" name="_noiDungHoi" disabled></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-style-label-input">
+                            Nội dung trả lời
+                        </div>
+                    </div>
+                    <div class="md-12-style-input">
+                        <div class="add-input-zone">
+                            <textarea class="input-border-form" type="text" rows="4" ng-model="target.noiDungTraLoi" style="width:100%" name="_noiDungTraLoi"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid || _formDetail.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

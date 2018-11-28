@@ -1,0 +1,83 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-bookmark"></span> Báo cáo bán hàng quá hạn tờ khai
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table">
+                        <tbody>
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label>Ngày hạch toán:  </label></td>
+                                <td col="2">
+
+                                    <label style="float:left; margin-right:10px;">Từ ngày</label>
+                                    <div class="add-input-zone" style="float:left;">
+                                        <input class="input-border-form" type="text" ng-model="target.fromDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="fromDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="fromDate = !fromDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+
+                                    <label style="float:left; margin-right:10px; margin-left:50px;">Đến ngày</label>
+                                    <div class="add-input-zone" style="float:left;">
+                                        <input class="input-border-form" type="text" ng-model="target.toDate" placeholder="{{config.dateFormat}}" uib-datepicker-popup="{{config.dateFormat}}"
+                                               is-open="toDate" datepicker-localdate />
+                                        <div class="button-calender" ng-click="toDate = !toDate; config.delegateEvent($event);">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px; line-height: 30px;"><label class="control-label">Đơn vị Hải quan: </label></td>
+                                <td colspan="2">
+                                    <!--<div ng-repeat="item in tagDonViHaiQuans" class="tag label label-success">
+                                        {{item.tenHaiQuan}}
+                                        <a class="close_btn" href="" ng-click="removeDonViHaiQuan($index)">×</a>
+                                    </div>-->
+
+                                    <input type="text" ng-model="filtered.advanceData.maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)" style="float: left; width: 80px; height: 32px; border: 1px solid #ccc; border-radius: 5px; margin-right: 8px;" />
+                                    <div style="float: left; width: 420px;">
+                                        <select class="form-control style-baocao" ng-options="opt.value as opt.description for opt in tempData.donViHaiQuans" ng-model="filtered.advanceData.maHaiQuan" name="_maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)">
+                                            <option value="" style="float: left; text-align: center;">----------- Lựa chọn đơn vị hải quan -----------</option>
+                                        </select>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            <tr style="float:left; border-top: 1px solid #ddd; width:100%;">
+                                <td style="float:left;width:180px;"><label class="control-label">Doanh nghiệp: </label></td>
+                                <td><button type="button" class="btn btn-primary" ng-click="selectCompany()">Chọn</button></td>
+                                <td>
+                                    <div ng-repeat="item in tagCompanies" class="tag label label-success">
+                                        {{item.text}}
+                                        <a class="close_btn" href="" ng-click="removeCompany($index)">×</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" prevent-default ng-click="report()">Báo cáo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-10">
+                            <div class="form-group">
+                                <button class="btn btn-primary form-control" prevent-default ng-click="printExcel()">Xuất Excel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

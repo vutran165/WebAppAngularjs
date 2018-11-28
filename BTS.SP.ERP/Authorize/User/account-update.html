@@ -1,0 +1,61 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên đăng nhập</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.username" name="_Username" required disabled>
+                    <span style="color:red" ng-show="_form._Username.$dirty && _form._Username.$invalid">
+                        <span ng-show="_form._Username.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Họ và tên</label><span style="color: red"> (2)</span>
+                    <input type="text" class="form-control" ng-model="target.fullName" name="_firstName">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Email</label><span style="color: red"> (3)</span>
+                    <input type="email" class="form-control" ng-model="target.email" name="_email">
+                </div>
+                <div class="col-lg-6">
+                    <label>Mô tả khác</label><span style="color: red"> (4)</span>
+                    <input type="text" class="form-control" ng-model="target.description" name="_moTa">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Mã đơn vị HQ chủ quản</label>
+                        <input class="form-control" type="text" ng-model="target.unitCode" ng-change="onChangeMaHaiQuan(target.unitCode)" disabled="" />
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label>Đơn vị hải quan chủ quản</label>
+                        <select class="form-control" ng-options="opt.value as opt.description for opt in tempData.donViHaiQuans" ng-model="target.unitCode" name="_maHaiQuan" ng-change="onChangeMaHaiQuan(target.unitCode)" disabled="">
+                            <option value="">-- Lựa chọn đơn vị hải quan --</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Trạng thái</label><span style="color: red"> (6)</span>
+                    <select class="form-control" ng-model="target.trangThai" ng-init="target.trangThai = 10" ng-options="opt.value as opt.text for opt in tempData.status"></select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

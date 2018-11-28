@@ -1,0 +1,32 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{data.status}} : {{data.statusText}}</h3>
+        <h4>{{data.data.message}}</h4>
+    </div>
+    <div class="modal-body">
+        <div ng-show="data.status == 400">
+            <div class="alert alert-warning" role="alert">
+                Dữ liệu đầu vào chưa hợp lệ!
+            </div>
+        </div>
+        <div ng-show="data.status == 404">
+            <div class="alert alert-warning" role="alert">
+                Không tìm thấy!
+            </div>
+        </div>
+        <div ng-show="data.status == 500">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Exception:</span>
+                Không thể thực hiện được!
+            </div>
+        </div>
+        <div ng-show="data.status == 401">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Exception:</span>
+                Bạn không có quyền truy cập!
+            </div>
+        </div>
+    </div>
+</div>

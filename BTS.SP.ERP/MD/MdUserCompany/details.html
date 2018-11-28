@@ -1,0 +1,59 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Tên đăng nhập</label>
+                    <input type="text" class="form-control" ng-model="target.username" name="_Username" disabled />
+
+                </div>
+                <div class="col-lg-6">
+                    <label>Mật khẩu</label>
+                    <input type="password" class="form-control" ng-pattern="/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/" ng-model="target.password" name="_Password" disabled />
+
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã số thuế</label>
+                    <input type="text" class="form-control" ng-model="target.maSoThue" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.companies | filter:$viewValue" typeahead-input-formatter="formatLabel($model, 'companies')" typeahead-on-select="selectedObject($item)" name="_maSoThue" disabled />
+
+                </div>
+                <div class="col-lg-6">
+                    <label>Đơn vị hải quan chủ quản</label>
+                    <input type="text" class="form-control" ng-model="target.maHaiQuan" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.donViHaiQuans | filter:$viewValue" typeahead-input-formatter="formatLabel($model, 'donViHaiQuans')" typeahead-on-select="selectedCustom($item)" name="_maHaiQuan" disabled />
+
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Họ và tên</label>
+                    <input type="text" class="form-control" ng-model="target.fullName" name="_firstName" disabled />
+                </div>
+                <div class="col-lg-6">
+                    <label>Email</label>
+                    <input type="email" class="form-control" ng-model="target.email" name="_email" disabled />
+                </div>
+            </div>
+
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Thông tin bổ sung</label>
+                    <textarea class="form-control" ng-model="target.description" placeholder="Nội dung..." rows="3" disabled></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

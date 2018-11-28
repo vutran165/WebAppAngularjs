@@ -1,0 +1,60 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}  {{lbl.lblCreate}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã cửa hàng</label>
+                    <input type="text" class="form-control" ng-model="target.maCuaHang" name="_maCuaHang" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên cửa hàng</label>
+                    <input type="text" class="form-control" ng-model="target.tenCuaHang" name="_tenCuaHang" disabled>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Thuộc Doanh Nghiệp</label>
+                    <input type="text" class="form-control" ng-model="target.maSoThue" ng-value="displayHelper(target.maSoThue,'companies')" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <input type="text" class="form-control" ng-model="target.trangThai" ng-value="displayHelper(target.trangThai,'status')" disabled/>
+                </div>
+            </div>
+
+            <!--<div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Địa chỉ</label><span style="color: red"> (3*)</span>
+                    <input type="text" class="form-control" ng-model="target.diaChi" name="_diaChi" maxlength="500" required>
+                    <span style="color: red" ng-show="_form._diaChi.$dirty && _form._diaChi.$invalid">
+                        <span ng-show="_form._diaChi.$error.required">Không được bỏ trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Email</label>
+                    <input type="email" class="form-control" ng-model="target.email" name="_email" maxlength="500">
+                    <span ng-show="_form._emails.$error.email">Không hợp lệ <span>(Ví dụ: 123@gmail.com)</span></span>
+                </div>
+            </div>-->
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Ghi chú</label>
+                    <textarea class="form-control" rows="3" ng-model="target.ghiChu" placeholder="Nội dung..." disabled></textarea>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

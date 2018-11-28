@@ -1,0 +1,128 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div><br />
+    <div class="modal-body">
+        <uib-tabset active="active">
+            <uib-tab heading="Thông tin kích hoạt">
+                <div class="modal-body">
+                    <form role="form" name="_form">
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Cán bộ xử lý</label><span style="color: red"> (1*)</span>
+                                <input type="text" class="form-control" ng-model="target.canBoXuLy">
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Ngày xử lý</label><span style="color: red">(2*)</span>
+                                <div class="add-input-zone">
+                                    <input type="text" class="form-control" ng-model="target.ngayXuLy" placeholder="{{config.dateFormat}}"
+                                           uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayxuly" datepicker-localdate/>
+                                    <div class="button-calender" ng-click="_ngayxuly = !_ngayxuly; config.delegateEvent($event);">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Nội dung xử lý</label><span style="color: red"> (3*)</span>
+                                <textarea class="form-control" rows="5" ng-model="target.noiDungXuLy"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </uib-tab>
+            <uib-tab index="0" heading="Thông tin đơn vị">
+                <table class="table table-bordered table-hover table-condensed">
+                    <div class="modal-body">
+                        <form role="form" name="_form">
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <label>Mã đơn vị</label>
+                                    <input type="text" class="form-control" ng-model="target.maDonVi" disabled>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Tên Đơn vị</label>
+                                    <input type="text" class="form-control" ng-model="target.tenDonVi" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <label>Địa chỉ</label>
+                                    <input type="text" class="form-control" ng-model="target.diaChiDonVi" disabled>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Số điện thoại</label>
+                                    <input type="text" class="form-control" ng-model="target.soDienThoai" disabled>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-lg-6">
+                                    <label>Đơn vị chủ quản</label>
+                                    <input type="text" ng-model="target.donViHaiQuanChuQuan" disabled />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Email</label>
+                                    <input type="text" class="form-control" ng-model="target.email" disabled>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </table>
+            </uib-tab>
+            <uib-tab index="0" heading="Thông tin siêu thị">
+                <table class="table table-bordered table-hover table-condensed">
+                    <thead>
+                        <tr>
+                            <th style="width: 3%" class="text-center">STT</th>
+                            <th style="width: 10%" class="text-center">Mã siêu thị</th>
+                            <th style="width: 18%" class="text-center">Tên siêu thị</th>
+                            <th style="width: 20%" class="text-center">Loại hình</th>
+                            <th style="width: 15%" class="text-center">Địa điểm</th>
+                            <th style="width: 15%" class="text-center">Số điện thoại</th>
+                            <th style="width: 25%" class="text-center">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-form name="_formDetail">
+                        <tr ng-if="isLoading">
+                            <td colspan="13"><my-loading></my-loading></td>
+                        </tr>
+                        <tr ng-repeat="item in lstCuaHang track by $index">
+                            <td style="text-align: center;">{{$index + 1}}</td>
+                            <td>{{item.maCuaHang}}</td>
+                            <td>
+                                <input type="text" style="width: 100%;" name="_tenCuaHang" ng-model="item.tenCuaHang" disabled="" />
+                            </td>
+                            <td>
+                                <input type="text" style="width: 100%;" name="_loaiHinhCuaHang" ng-model="item.loaiHinhCuaHang" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.loaiHinhCuaHangs | filter:$viewValue" disabled="" />
+                            </td>
+                            <td>
+                                <input type="text" style="width: 100%;" name="_diaDiemBanHang" ng-model="item.diaDiemBanHang" disabled="" />
+                            </td>
+                            <td>
+                                <input type="text" style="width: 100%;" name="_soDienThoai" ng-model="item.soDienThoai" disabled="" />
+                            </td>
+                            <td>
+                                <input type="email" style="width: 100%;" name="_emails" ng-model="item.email" disabled="" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="panel-footer">
+                    <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                    ng-change="pageChanged()"
+                                    items-per-page="paged.itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                                    boundary-links="true" num-pages="paged.totalPage"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-success" type="button" ng-click="active()"><span class="glyphicon glyphicon-remove"></span>&ensp;{{config.label.btnActive}}</button>
+        <button class="btn btn-danger" type="button" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

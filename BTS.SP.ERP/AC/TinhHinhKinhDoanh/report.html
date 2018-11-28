@@ -1,0 +1,274 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="button-close" ng-click="goIndex()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-default" prevent-default title="In danh sách" ng-click="print()"><span class="glyphicon glyphicon-print"></span>&ensp;In</button>
+            <button class="btn btn-default" prevent-default title="In danh sách" ng-click="printExcel()"><span class="glyphicon glyphicon-print"></span>&ensp;Xuất Excel</button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="main-report">
+            <br />
+            <style>
+                .date-time,
+                th,
+                td,
+                span {
+                    font-size: 14px;
+                    font-family: 'Times New Roman';
+                }
+
+                th,
+                td {
+                    padding: 2px;
+                }
+
+                .header-report {
+                    margin-bottom: 15px;
+                }
+
+                    .header-report table,
+                    .infor-report table {
+                        width: 100%;
+                        padding-left: 2px;
+                        border: 0;
+                    }
+
+                .infor-report {
+                    padding-left: 50px;
+                }
+
+                .data-report {
+                    margin-bottom: 10px;
+                }
+
+                    .data-report table {
+                        width: 100%;
+                        border: 1px solid;
+                        border-collapse: collapse;
+                    }
+
+                        .data-report table thead tr th,
+                        .data-report table tbody.data-detail tr td {
+                            border: 1px solid;
+                        }
+
+                        .data-report table tbody.data-detail tr td {
+                            font-size: 13px !important;
+                        }
+
+                .infor-report table tr td {
+                    position: relative;
+                }
+
+                .dotted-description {
+                    position: absolute;
+                    width: calc(100% - 110px);
+                    border-bottom: 1px dotted;
+                }
+
+                .signature-place table {
+                    width: 100%;
+                }
+
+                .signature-place .date-time {
+                    float: right;
+                    font-style: italic;
+                    padding: 10px 30px 5px 10px;
+                }
+
+                .signature-place table thead tr th {
+                    text-align: center;
+                }
+
+                .signature-place table tbody tr td {
+                    text-align: center;
+                }
+
+                .end-page {
+                    height: 100px;
+                }
+
+                .label-info-report {
+                    float: left;
+                    font-weight: bold;
+                }
+
+                .info-company-top-left {
+                    float: left;
+                    text-align: center;
+                    font-weight: bold;
+                    margin-left: 10px;
+                }
+
+                .info-datereport-top-right {
+                    float: right;
+                    text-align: center;
+                    font-weight: bold;
+                    padding-right: 20px;
+                }
+
+                .name-report {
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 22px !important;
+                    padding: 5px;
+                }
+
+                .info-contract-attachment {
+                    text-align: center;
+                    font-style: italic;
+                }
+
+                .text-center {
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .name-tong-hop {
+                    text-align: center;
+                    font-weight: bold;
+                }
+
+                .value-tong-hop {
+                    font-weight: bold;
+                    text-align: right;
+                }
+
+                .unitCustom {
+                    text-transform: uppercase;
+                }
+                .title-body-report{
+                    font-weight:bold;
+                }
+            </style>
+
+            <div id="dataTable">
+                <div class="header-report">
+                    <table>
+                        <tr>
+                            <td class="info-company-top-left unitCustom">
+                                <p><b>{{target.tenDoanhNghiep}}</b></p>
+                                <p><span>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span></p>
+                                <!-- TỔNG CỤC HẢI QUAN -->
+                            </td>
+                            <td class="info-datereport-top-right">
+                                <p>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+                                <p>Độc lập - Tự do - Hạnh phúc</p>
+                                <p><span>&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;</span></p>
+                                <p><i>........., ngày ..... tháng ..... năm.....</i></p>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row name-report ">
+                        <p>BÁO CÁO TÌNH HÌNH HOẠT ĐỘNG</p>
+                        <p>KINH DOANH BÁN HÀNG MIỄN THUẾ</p>
+                    </div>
+                    <p class="info-contract-attachment">(Từ ngày: {{target.fromDate | date: 'dd/MM/yyyy'}} - Đến ngày: {{target.toDate | date: 'dd/MM/yyyy'}})</p>
+                </div>
+            </div>
+            <br>
+            <div class="data-report">
+                <div class="title-body-report"><span>1. Số lượng hàng hóa đưa vào, ra cửa hàng miễn thuế</span></div>
+                <table style="margin: 15px 0 15px 0;">
+                    <thead>
+                        <tr>
+                            <th rowspan="2" class="text-center" style="width: 5%">STT</th>
+                            <th rowspan="2" class="text-center" style="width: 30%">Tên hàng</th>
+                            <th rowspan="2" class="text-center" style="width: 5%">Tờ khai</th>
+                            <th rowspan="2" class="text-center" style="width: 10%">Ngày tờ khai</th>
+                            <th rowspan="2" class="text-center" style="width: 10%">Đơn vị tính</th>
+                            <th colspan="2" class="text-center" style="width: 15%">Đưa vào</th>
+                            <th colspan="2" class="text-center" style="width: 15%">Bán ra</th>
+                            <th rowspan="2" class="text-center" style="width: 10%;">Ghi chú</th>
+                        </tr>
+                        <tr>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-center">Trị giá</th>
+                            <th class="text-center">Số lượng</th>
+                            <th class="text-center">Trị giá</th>
+                        </tr>
+                    </thead>
+                    <tbody class="data-detail">
+                        <tr ng-repeat="item in target.dataDetails">
+                            <td style="text-align:center;">{{$index + 1}}</td>
+                            <td>
+                                {{item.maHang}} - {{item.tenHang}}
+                            </td>
+                            <td>{{item.soToKhai}}</td>
+                            <td>{{item.ngayToKhai | date :'dd/MM/yyyy'}}</td>
+                            <td>
+                                {{item.donViTinh}}
+                            </td>
+                            <td style="text-align:center;">
+                                {{item.soLuongVao}}
+                            </td>
+                            <td style="text-align:right;">
+                                {{item.thanhTienVao | number}}
+                            </td>
+                            <td style="text-align:center;">
+                                {{item.soLuongRa}}
+                            </td>
+                            <td style="text-align:right;">
+                                {{item.thanhTienRa | number}}
+                            </td>
+                            <td style="text-align:center;"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="5" style="font-weight:bold;text-align:center;">Tổng</td>
+                            <td style="text-align:center;">{{robot.sum(target.dataDetails,'soLuongVao') | number }}</td>
+                            <td style="text-align:right;">{{robot.sum(target.dataDetails,'thanhTienVao') | number }}</td>
+                            <td style="text-align:center;">{{robot.sum(target.dataDetails,'soLuongRa') | number }}</td>
+                            <td style="text-align:right;">{{robot.sum(target.dataDetails,'thanhTienRa') | number }}</td>
+                            <td ></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="title-body-report"><span>2. Số lượng thanh khoản:</span></div>
+                <div>
+                    <p>- Số tờ khai thanh khoản:</p>
+                    <p>- Trị giá thanh khoản: </p>
+                    <p style="padding-left: 20px">+ Bán ra: {{target.totalBanRa | number}}</p>
+                    <p style="padding-left: 20px">+ Tiêu thụ nội địa: {{target.totalTieuThuNoiDia | number}}</p>
+                    <p style="padding-left: 20px">+ Tái xuất: {{target.totalTaiXuat | number}}</p>
+                    <p style="padding-left: 20px">+ Tiêu hủy: {{target.totalTieuHuy | number}}</p>
+                </div>
+                <div class="title-body-report"><span>3. Tình hình chấp hành luật hải quan:</span></div>
+                <div>
+                    <p>- Số lần bị xử vi phạm:</p>
+                    <p>- Hành vi vi phạm:</p>
+                    <p>- Hình thức xử phạt:</p>
+                    <p><b>Nơi nhận:</b></p>
+                </div>
+            </div>
+            <div class="signature-place">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:30%"></th>
+                            <th style="width:30%"></th>
+                            <th >ĐẠI DIỆN DOANH NGHIỆP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td ><i>(Ký tên, đóng dấu)</i></td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class=end-page></div>
+        </div>
+    </div>
+</div>

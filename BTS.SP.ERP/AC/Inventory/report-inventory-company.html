@@ -1,0 +1,252 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="button-close" ng-click="goIndex()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-default" prevent-default title="In báo cáo" ng-click="print()"><span class="glyphicon glyphicon-print"></span>&ensp;In</button>
+            <button class="btn btn-default" prevent-default title="Xuất Excel" ng-click="printExcel()"><span class="glyphicon glyphicon-print"></span>&ensp;Xuất Excel</button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="main-report">
+            <br />
+            <div id="dataTable">
+                <style>
+                    .date-time,
+                    th,
+                    td,
+                    span {
+                        font-size: 14px;
+                        font-family: 'Times New Roman';
+                    }
+
+                    th,
+                    td {
+                        padding: 2px;
+                    }
+
+                    .header-report {
+                        margin-bottom: 30px;
+                    }
+
+                        .header-report table,
+                        .infor-report table {
+                            width: 100%;
+                            padding-left: 20px;
+                            border: 0;
+                        }
+
+                    .infor-report {
+                        padding-left: 10px;
+                    }
+
+                    .data-report table {
+                        width: 100%;
+                        border: 1px solid;
+                        border-collapse: collapse;
+                    }
+
+                        .data-report table thead tr th,
+                        .data-report table tbody.data-detail tr td {
+                            border: 1px solid;
+                        }
+
+                        .data-report table tbody.data-detail tr td {
+                            font-size: 13px !important;
+                        }
+
+                    .infor-report table tr td {
+                        position: relative;
+                    }
+
+                    .dotted-description {
+                        position: absolute;
+                        width: calc(100% - 110px);
+                        border-bottom: 1px dotted;
+                    }
+
+                    .signature-place table {
+                        width: 100%;
+                    }
+
+                    .signature-place .date-time {
+                        float: right;
+                        font-style: italic;
+                        padding: 10px 30px 5px 10px;
+                    }
+
+                    .signature-place table thead tr th {
+                        text-align: center;
+                    }
+
+                    .signature-place table tbody tr td {
+                        text-align: center;
+                    }
+
+                    .end-page {
+                        height: 100px;
+                    }
+
+                    .label-info-report {
+                        float: left;
+                        font-weight: bold;
+                    }
+
+                    .info-company-top-left {
+                        float: left;
+                        text-align: left;
+                        font-weight: bold;
+                    }
+
+                    .info-datereport-top-right {
+                        float: right;
+                        text-align: right;
+                        font-style: italic;
+                    }
+
+                    .name-report {
+                        text-align: center;
+                        font-weight: bold;
+                        font-size: 22px !important;
+                        padding: 5px;
+                    }
+
+                    .info-contract-attachment {
+                        text-align: center;
+                        font-style: italic;
+                    }
+
+                    .text-center {
+                        text-align: center;
+                        font-weight: bold;
+                    }
+
+                    .name-tong-hop {
+                        text-align: right;
+                        font-weight: bold;
+                    }
+
+                    .value-tong-hop {
+                        font-weight: bold;
+                        text-align: right;
+                    }
+
+                    .unitCustom {
+                        text-transform: uppercase;
+                    }
+
+                    #_warning {
+                        text-align: center;
+                        width: 100%;
+                        font-weight: bold;
+                        float: left;
+                        color: red;
+                    }
+                </style>
+
+                <div class="infor-report">
+                    <table style="float:left; width:100%; margin-bottom:15px;">
+                        <tr>
+                            <td style="float:left;width:100%;text-align:left;font-weight:bold;">
+                                TỔNG CỤC HẢI QUAN
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float: left; text-align: center; width: 100%; font-weight: bold;">{{title}} &nbsp;&nbsp;- &nbsp;&nbsp;{{year}}</td>
+                            <td id="_warning">{{warning}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <br>
+            <div class="infor-report">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            <div class="label-info-report">Tên doanh nghiệp: </div>
+                            <span>&nbsp;{{data.tenDoanhNghiep}}</span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="label-info-report">Mã số thuế: </div>
+                            <span>&nbsp;{{data.maSoThue}}</span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="label-info-report">Địa chỉ: </div>
+                            <span>&nbsp;{{data.diaChiDoanhNghiep}}</span>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="label-info-report">Đơn vị hải quan chủ quản: </div>
+                            <span>&nbsp;{{displayHelper(data.idHaiQuan,'donViHaiQuans')}}</span>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="data-report">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 2%" rowspan="2">STT</th>
+                            <th class="text-center" style="width: 8%" rowspan="2">Mã HS</th>
+                            <th class="text-center" style="width: 20%" rowspan="2">Tên HS</th>
+                            <!--<th class="text-center" style="width: 10%" rowspan="2">Đơn vị tính</th>-->
+                            <th class="text-center" style="width: 17.5%" colspan="2">Tồn đầu kỳ</th>
+                            <th class="text-center" style="width: 17.5%" colspan="2">Nhập trong kỳ</th>
+                            <th class="text-center" style="width: 17.5%" colspan="2">Xuất trong kỳ</th>
+                            <th class="text-center" style="width: 17.5%" colspan="2">Tồn cuối kỳ</th>
+                        </tr>
+
+                    </thead>
+                    <tbody class="data-detail">
+                        <tr ng-repeat="item in data.dataDetails">
+                            <td style="text-align: center;width: 2%">{{$index+1}}</td>
+                            <td style="width: 8%">{{item.maHs}}</td>
+                            <td style="width: 20%">{{displayHelper(item.maHs,'nhomVatTus')}}</td>
+                            <!--<td style="width: 10%">{{item.donViTinh}}</td>-->
+                            <td style="text-align:center;width: 17.5% " colspan="2">{{item.tonDauKySL  | number}}</td>
+                            <td style="text-align:center;width: 17.5%" colspan="2">{{item.nhapKySL  | number}}</td>
+                            <td style="text-align:center;width: 17.5%" colspan="2">{{item.xuatKySL | number}}</td>
+                            <td style="text-align:center;width: 17.5%" colspan="2">{{item.tonCuoiKySL | number}}</td>
+
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;" colspan="3">Tổng cộng</td>
+                            <td style="text-align:center;width: 17.5%" colspan="2">{{robot.sum(data.dataDetails, 'tonDauKySL') | number}}</td>
+                            <td style="text-align:center;width: 17.5%" colspan="2">{{robot.sum(data.dataDetails, 'nhapKySL') | number}}</td>
+                            <td style="text-align:center;width: 17.5%" colspan="2">{{robot.sum(data.dataDetails, 'xuatKySL') | number}}</td>
+                            <td style="text-align:center;width: 17.5%" colspan="2">{{robot.sum(data.dataDetails, 'tonCuoiKySL') | number}}</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="signature-place">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

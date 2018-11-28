@@ -1,0 +1,134 @@
+﻿<style>
+    #myWorkContent {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+</style>
+<div>
+    <div>
+        <div class="modal-header">
+            <h3 class="modal-title">{{title()}}</h3>
+            <div class="button-close" ng-click="cancel()">
+                <i class="glyphicon glyphicon-remove x-close"></i>
+            </div>
+        </div>
+        <div class="modal-body" ng-form name="_form">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Mã định mức:
+                        </div>
+                        <div class="md-4-style-input">
+                            <input class="input-border-form" type="text" ng-model="target.maDinhMuc" maxlength="50" name="_maDinhMuc" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Tên định mức:
+                        </div>
+                        <div class="md-4-style-input">
+                            <input class="input-border-form" type="text" ng-model="target.tenDinhMuc" maxlength="50" name="_tenDinhMuc" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Mã đối tượng: 
+                        </div>
+                        <div class="md-4-style-input">
+                            <input class="input-border-form" type="text" ng-model="target.maDoiTuong" maxlength="50" name="_maDoiTuong" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Tên đối tượng:
+                        </div>
+                        <div class="md-4-style-input">
+                            {{displayHelper(target.maDoiTuong, 'doiTuongs')}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Trạng thái:
+                        </div>
+                        <div class="md-4-style-input">
+                            {{displayHelper(target.trangThai, 'status')}}
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="md-style-label-input">
+                            Ghi chú
+                        </div>
+                        <div class="md-12-style-input">
+                            <textarea class="input-border-form" style="width: 100%;" ng-model="target.ghiChu" maxlength="300" rows="1" disabled></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-body">
+            <uib-tabset active="active">
+                <uib-tab index="0" heading="Chi tiết">
+                    <div id="myWorkContent">
+                        <table class="table table-bordered table-hover table-condensed" style="width:1500px">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">STT</th>
+                                    <th class="text-center">Mã hàng hóa</th>
+                                    <th class="text-center">Tên hàng hóa</th>
+                                    <th class="text-center">Đơn vị tính</th>
+                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-center">Trạng thái</th>
+                                    <th class="text-center"></th>
+                                </tr>
+                            </thead>
+                            <tbody ng-form name="_formDetail">
+                                <tr ng-if="isLoading">
+                                    <td colspan="7"><my-loading></my-loading></td>
+                                </tr>
+                                <tr ng-repeat="item in data track by $index">
+                                    <td class="text-center">{{$index + 1}}</td>
+                                    <td nowrap>
+                                        {{item.maHangHoa}}
+                                    </td>
+                                    <td>
+                                        {{displayHelper(item.tenHangHoa, 'merchandises')}}
+                                    </td>
+                                    <td>
+                                        {{displayHelper(item.maDonViTinh, 'donvitinhs')}}
+                                    </td>
+                                    <td>
+                                        {{item.soLuong}}
+                                    </td>
+                                    <td>
+                                        {{item.trangThai}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                        ng-change="pageChanged()"
+                                        items-per-page="paged.itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                                        boundary-links="true" num-pages="paged.totalPage"
+                                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                        </uib-pagination>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

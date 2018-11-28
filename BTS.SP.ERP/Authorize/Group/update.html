@@ -1,0 +1,44 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row">
+                <div class="col-lg-6">
+                    <label>Mã nhóm quyền</label><span style="color: red"> (1)</span>
+                    <input type="text" class="form-control" ng-model="target.idGroup" name="_maTk" maxlength="50" required disabled>
+                    <span style="color:red" ng-show="_form._maTk.$dirty && _form._maTk.$invalid">
+                        <span ng-show="_form._maTk.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <label>Tên nhóm quyền</label><span style="color: red"> (2)</span>
+                        <input type="text" class="form-control" ng-model="target.nameGroup" name="_tennhomquyen" required />
+                        <span style="color:red" ng-show="_form._tennhomquyen.$dirty && _form._tennhomquyen.$invalid">
+                            <span ng-show="_form._tennhomquyen.$error.required">Không được để trống</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label>Đơn vị Hải quan</label><span style="color: red"> (3)</span>
+                    <input type="text" class="form-control" ng-model="target.tenHaiQuan" name="_tennhomquyen" disabled />
+                </div>
+                <div class="col-lg-6">
+                    <label>Mô tả</label><span style="color: red"> (4)</span>
+                    <input type="text" class="form-control" ng-model="target.description">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

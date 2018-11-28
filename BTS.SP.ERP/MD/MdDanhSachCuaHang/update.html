@@ -1,0 +1,177 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}} {{lbl.lblCreate}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <br />
+    <div class="modal-body">
+        <uib-tabset active="active">
+            <uib-tab index="0" heading="Thông tin siêu thị">
+                <div class="modal-body">
+                    <form role="form" name="_form">
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Mã siêu thị</label><span style="color: red"> (1*)</span>
+                                <input type="text" class="form-control" ng-model="target.maCuaHang" required="" name="_macuahang" maxlength="50" disabled>
+                                <span style="color: red" ng-show="_form._macuahang.$dirty && _form._macuahang.$invalid">
+                                    <span ng-show="_form._macuahang.$error.required">Mã cửa hàng không được để trống</span>
+                                </span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Tên siêu thị</label><span style="color: red"> (2*)</span>
+                                <input type="text" class="form-control" ng-model="target.tenCuaHang" name="_tencuahang" maxlength="200" required>
+                                <span style="color: red" ng-show="_form._tencuahang.$dirty && _form._tencuahang.$invalid">
+                                    <span ng-show="_form._tencuahang.$error.required">Tên cửa hàng không được để trống</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Loại hình</label><span style="color: red"> (3*)</span>
+                                <input type="text" class="form-control" ng-model="target.loaiHinhCuaHang" name="_loaihinh" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.loaiHinhCuaHang | filter:$viewValue">
+                                <span style="color: red" ng-show="_form._loaihinh.$dirty && _form._loaihinh.$invalid">
+                                    <span ng-show="_form._loaihinh.$error.required">Loại hình không được để trống</span>
+                                </span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Địa điểm</label><span style="color: red"> (4*)</span>
+                                <input type="text" class="form-control" ng-model="target.diaDiemBanHang">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-lg-6">
+                                <label>Số điện thoại</label><span style="color: red"> (5*)</span>
+                                <input type="text" class="form-control" name="_SoDienThoai" ng-model="target.soDienThoai" ng-pattern="/^[0-9]+$/" required>
+                                <span style="color:red" ng-show="_form._SoDienThoai.$dirty && _form._SoDienThoai.$invalid">
+                                    <span ng-show="_form._SoDienThoai.$error.pattern">Ký tự bắt buộc phải là số</span>
+                                </span>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Hộp thư</label><span style="color: red"> (6*)</span>
+                                <input type="email" class="form-control" name="_emails" ng-model="target.email">
+                                <span style="color:red" ng-show="_form._emails.$dirty && _form._emails.$invalid">
+                                    <span ng-show="_form._emails.$error.email">Không hợp lệ <span>(Ví dụ: 123@gmail.com)</span></span>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </uib-tab>
+            <uib-tab index="0" heading="Thông tin nhân viên siêu thị">
+                <table class="table table-bordered table-hover table-condensed">
+                    <tr ng-show="isLoading">
+                        <td colspan="7"><my-loading></my-loading></td>
+                    </tr>
+                    <thead>
+                        <tr>
+                            <th style="width:3%" class="text-center">STT</th>
+                            <th style="width:15%" class="text-center">Mã nhân viên</th>
+                            <th style="width:20%" class="text-center">Họ tên</th>
+                            <th style="width:15%" class="text-center">Điện thoại</th>
+                            <th style="width:15%" class="text-center">Hộ chiếu</th>
+                            <th style="width:15%" class="text-center">Giới tính</th>
+                            <th style="width:15%" class="text-center">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-form name="_formDetail">
+                        <tr ng-if="isLoading">
+                            <td colspan="13"><my-loading></my-loading></td>
+                        </tr>
+                        <tr ng-repeat="item in lstNhanVien track by $index">
+                            <td style="text-align:center;">{{$index + 1}}</td>
+                            <td>{{item.maNhanVien}}</td>
+                            <td>
+                                <input type="text" style="width:100%;" name="_tenNhanVien" ng-model="item.tenNhanVien" required />
+                                <span style="color: red" ng-show="_formDetail._tenNhanVien.$dirty && _formDetail._tenNhanVien.$invalid">
+                                    <span ng-show="_formDetail._tenNhanVien.$error.required">Không được để trống</span>
+                                </span>
+                            </td>
+                            <td>
+                                <input type="text" style="width:100%;" name="_soDienThoai" ng-model="item.soDienThoai" ng-pattern="/^[0-9]+$/" required />
+                                <span style="color:red" ng-show="_formDetail._soDienThoai.$dirty && _formDetail._soDienThoai.$invalid">
+                                    <span ng-show="_formDetail._soDienThoai.$error.pattern">SĐT phải là số</span>
+                                </span>
+                            </td>
+                            <td>
+                                <input type="text" style="width:100%;" name="_chungMinhThu" ng-model="item.chungMinhThu" ng-pattern="/^[0-9]+$/" required />
+                                <span style="color:red" ng-show="_formDetail._chungMinhThu.$dirty && _formDetail._chungMinhThu.$invalid">
+                                    <span ng-show="_formDetail._chungMinhThu.$error.pattern">CMT phải là số</span>
+                                </span>
+                            </td>
+                            <td>
+                                <select class="form-control" ng-init="1" ng-if="item.gioiTinh == 1 ? 'Nam':'Nữ' " ng-model="item.gioiTinh" ng-options="opt.value as opt.text for opt in tempData.sex"></select>
+                            </td>
+                            <td>
+                                <select class="form-control" ng-if="item.trangThai == 10 ? 'Hiệu lực':'Hết hiệu lực' " ng-model="item.trangThai" ng-options="opt.value as opt.text for opt in tempData.status"></select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="panel-footer">
+                    <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                    ng-change="pageChanged()"
+                                    items-per-page="paged.itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                                    boundary-links="true" num-pages="paged.totalPage"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </uib-tab>
+
+            <uib-tab index="0" heading="Thông tin kho">
+                <table class="table table-bordered table-hover table-condensed">
+                    <tr ng-show="isLoading">
+                        <td colspan="7"><my-loading></my-loading></td>
+                    </tr>
+                    <thead>
+                        <tr>
+                            <th style="width:3%" class="text-center">STT</th>
+                            <th style="width:20%" class="text-center">Mã kho</th>
+                            <th style="width:20%" class="text-center">Tên kho</th>
+                            <th style="width:25%" class="text-center">Địa chỉ</th>
+                            <th style="width:20%" class="text-center">Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-form name="_formDetail2">
+                        <tr ng-if="isLoading">
+                            <td colspan="13"><my-loading></my-loading></td>
+                        </tr>
+                        <tr ng-repeat="item in lstKhoHang track by $index">
+                            <td style="text-align:center;">{{$index + 1}}</td>
+                            <td>{{item.maKho}}</td>
+                            <td>
+                                <input type="text" style="width:100%;" name="_tenKho" ng-model="item.tenKho" ng-pattern="/^[0-9]+$/" required />
+                                <span style="color: red" ng-show="_formDetail2._tenKho.$dirty && _formDetail2._tenKho.$invalid">
+                                    <span ng-show="_formDetail2._tenKho.$error.required">Không được để trống</span>
+                                </span>
+                            </td>
+                            <td>
+                                <input type="text" style="width:100%;" name="_diaChi" ng-model="item.diaChi" ng-pattern="/^[0-9]+$/" required />
+                                <span style="color: red" ng-show="_formDetail2._diaChi.$dirty && _formDetail2._diaChi.$invalid">
+                                    <span ng-show="_formDetail2._diaChi.$error.required">Không được để trống</span>
+                                </span>
+                            </td>
+                            <td>
+                                <select class="form-control" ng-if="item.trangThai == 10 ? 'Hiệu lực':'Hết hiệu lực' " ng-model="item.trangThai" ng-options="opt.value as opt.text for opt in tempData.status"></select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="panel-footer">
+                    <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                    ng-change="pageChanged()"
+                                    items-per-page="paged.itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                                    boundary-links="true" num-pages="paged.totalPage"
+                                    previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                    </uib-pagination>
+                </div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

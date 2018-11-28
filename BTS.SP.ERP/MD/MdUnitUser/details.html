@@ -1,0 +1,117 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div><br />
+    <div>
+        <div class="modal-body">
+
+            <form role="form" name="_form">
+
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <label>Mã số thuế</label>
+                        <input type="text" class="form-control" ng-model="target.maSoThue" disabled />
+                       
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Doanh nghiệp</label>
+                        <!--<select class="form-control" ng-options="opt.id as opt.description for opt in tempData.companies" ng-model="target.maDoanhNghiep" name="_maDoanhNghiep" ng-change="objectChange(target.maDoanhNghiep)" disabled></select>-->
+                        <input type="text" class="form-control" ng-model="target.maDoanhNghiep" typeahead-editable="false" uib-typeahead="opt.id as opt.text for opt in tempData.companies | filter:$viewValue" typeahead-input-formatter="displayHelper($model, 'companies')"  disabled />
+                    </div>
+
+
+                </div>
+
+                <div class="row form-group">
+
+                    <div class="col-lg-6">
+                        <label>Mã hải quan</label>
+                        <input type="text" class="form-control" ng-model="target.idHaiQuan"  disabled/>
+                       
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label>Đơn vị hải quan chủ quản</label>
+                        <input type="text" class="form-control" ng-model="target.donViHaiQuanChuQuan" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.donViHaiQuans | filter:$viewValue" typeahead-input-formatter="formatLabel($model, 'donViHaiQuans')"   disabled />
+
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <label>Mã cửa hàng</label>
+                        <input type="text" class="form-control" ng-model="target.maDonVi" name="_code" maxlength="50" required disabled>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Tên cửa hàng</label>
+                        <input type="text" class="form-control" ng-model="target.tenDonVi" name="_unitUserName" maxlength="300" disabled/>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <label>Địa chỉ</label>
+                        <input type="text" class="form-control" name="_diaChi" ng-model="target.diaChiDonVi" disabled/>
+
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Số điện thoại</label>
+                        <input type="text" name="_SoDienThoai" class="form-control" ng-model="target.soDienThoai" ng-pattern="/^[0-9]+$/" disabled>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <label>Email</label>
+                        <input type="email" name="_emails" class="form-control" ng-model="target.email" disabled/>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <label>Tỉnh/Thành phố</label>
+                        <input type="text" name="_tinhthanh" class="form-control" ng-model="target.tinh" uib-typeahead="opt.value as opt.text for opt in tempData.huyens | filter:$viewValue | limitTo:5" typeahead-editable="false" typeahead-input-formatter="formatLabel($model, 'tinhs')" disabled />
+                    </div>
+                </div>
+               
+                <div class="row form-group">
+                    <div class="col-lg-6">
+                        <label>Họ tên người liên hệ</label>
+                        <input type="text" name="_tennguoilienhe" class="form-control" ng-model="target.hoTenNguoiLienHe" disabled/>
+                    </div>
+                    <div class="col-lg-6">
+                        <label>Chức vụ người liên hệ</label>
+                        <input type="text" name="_chucvunguoilienhe" class="form-control" ng-model="target.chucVuNguoiLienHe" disabled/>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-12">
+                        <label>Loại hình cửa hàng</label>
+                        <tags-input class="bootstrap" name="_loaiHinhCuaHang" ng-model="tagdoiTuongs" typeahead-editable="false"
+                                    placeholder="" replace-spaces-with-dashes="false" disabled>
+                            <auto-complete source="loadDoiTuong($query)" min-length="0" debounce-delay="0" max-results="10" disabled></auto-complete>
+                        </tags-input>
+
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-lg-12">
+                        <label>Đối tượng khách hàng</label>
+                        <tags-input class="bootstrap" name="_customerTypes" ng-model="tagCustomerTypes" typeahead-editable="false"
+                                    placeholder="Thêm loại hình" replace-spaces-with-dashes="false" disabled>
+                            <auto-complete source="loadCustomerType($query)" min-length="0" debounce-delay="0" max-results="10" disabled></auto-complete>
+                        </tags-input>
+
+                    </div>
+                </div>
+
+               
+            </form>
+           
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span>&ensp;{{config.label.btnCancel}}</button>
+    </div>
+</div>

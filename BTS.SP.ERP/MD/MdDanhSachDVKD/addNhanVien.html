@@ -1,0 +1,60 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}} {{lbl.lblCreate}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <br />
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã nhân viên</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.maNhanVien" name="_manhanvien" maxlength="200" required disabled="">
+                    <span style="color: red" ng-show="_form._manhanvien.$dirty && _form._manhanvien.$invalid">
+                        <span ng-show="_form._manhanvien.$error.required">Mã nhân viên không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên nhân viên</label><span style="color: red"> (2*)</span>
+                    <input type="text" class="form-control" ng-model="target.tenNhanVien" name="_tenNhanvien" required="">
+                    <span style="color: red" ng-show="_form._tenNhanvien.$dirty && _form._tenNhanvien.$invalid">
+                        <span ng-show="_form._tenNhanvien.$error.required">Tên nhân viên không được để trống</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Số điện thoại liên hệ</label><span style="color: red"> (3*)</span>
+                    <input type="tel" ng-model="target.soDienThoai" name="_SoDienThoai" class="form-control" ng-pattern="/^[0-9]+$/" required />
+                    <span style="color:red" ng-show="_form._SoDienThoai.$dirty && _form._SoDienThoai.$invalid">
+                        <span ng-show="_form._SoDienThoai.$error.pattern">SĐT phải là số</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Số chứng minh thư</label><span style="color: red"> (4*)</span>
+                    <input type="text" class="form-control" name="_chungMinh" ng-model="target.chungMinhThu" ng-pattern="/^[0-9]+$/" required>
+                    <span style="color:red" ng-show="_form._chungMinh.$dirty && _form._chungMinh.$invalid">
+                        <span ng-show="_form._chungMinh.$error.pattern">CMT phải là số</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Giới tính</label><span style="color: red"> (5*)</span>
+                    <select class="form-control" ng-init="target.GioiTinh = 1" ng-model="target.gioiTinh" ng-options="opt.value as opt.text for opt in tempData.sex"></select>
+                </div>
+                <div class="col-lg-6">
+                    <label>Trạng thái</label><span style="color: red"> (6*)</span>
+                    <select class="form-control" ng-init="target.trangThai = 10" ng-model="target.trangThai" ng-options="opt.value as opt.text for opt in tempData.status"></select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

@@ -1,0 +1,153 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="button-close" ng-click="goIndex()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-default" prevent-default title="In danh sách" ng-click="print()"><span class="glyphicon glyphicon-print"></span>&ensp;In</button>
+            <button class="btn btn-default" prevent-default title="In danh sách" ng-click="printExcel()"><span class="glyphicon glyphicon-print"></span>&ensp;Xuất Excel</button>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="main-report">
+            <br />
+            <div id="dataTable">
+                <style>
+                    th,
+                    td {
+                        padding: 5px;
+                    }
+
+                    table {
+                        margin: 0 auto;
+                    }
+
+                    .header-report {
+                        margin-bottom: 30px;
+                    }
+
+                        .header-report table,
+                        .infor-report table {
+                            width: 100%;
+                            border: 0;
+                        }
+
+                    .data-report table {
+                        width: 100%;
+                        border: 1px solid;
+                        border-collapse: collapse;
+                    }
+
+                        .data-report table tr,
+                        .data-report table tr td,
+                        .data-report table tr th {
+                            border: 1px solid;
+                        }
+
+                    .header-report table tr {
+                        text-align: center;
+                    }
+
+                    .header-report table tbody tr td {
+                        width: 30%;
+                    }
+
+                    .infor-report table tr td {
+                        position: relative;
+                    }
+
+                    .dotted-description {
+                        position: absolute;
+                        width: calc(100% - 110px);
+                        border-bottom: 1px dotted;
+                    }
+
+                    .signature-place table {
+                        width: 100%;
+                    }
+
+                        .signature-place table thead tr th {
+                            width: 33.33%;
+                            text-align: center;
+                        }
+
+                        .signature-place table tbody tr td {
+                            height: 150px;
+                        }
+
+                    .label-info-report {
+                        float: left;
+                        width: 110px;
+                    }
+                </style>
+                <div class="header-report">
+                    <table style="float:left; width:100%; margin-bottom:15px;">
+                        <tr>
+                            <td style="float:left;width:100%;text-align:left;font-weight:bold;">
+                                TỔNG CỤC HẢI QUAN
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="float:left;text-align:center;width:100%;font-weight:bold;">
+                                BÁO CÁO XUẤT NHẬP TỒN KHO THEO {{data.groupType}}
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+            <div class="data-report">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="text-center" style="width: 5%">STT</th>
+                            <th class="text-center" style="width: 5%">Mã</th>
+                            <th class="text-center" style="width: 15%">Tên</th>
+                            <th class="text-center" style="width: 10%">Số lượng</th>
+                            <th class="text-center" style="width: 10%">Giá trị</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in data.detailData">
+                            <td style="text-align:center">{{$index}}</td>
+                            <td>{{item.code}}</td>
+                            <td>{{item.name}}</td>
+                            <td style="text-align:center;">{{item.closingQuantity | number}}</td>
+                            <td style="text-align:right;">{{item.closingValue | number}}</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;" colspan="3">Tổng cộng</td>
+                            <td style="text-align:center;">{{robot.sum(data.detailData, 'closingQuantity') | number}}</td>
+                            <td style="text-align:right;">{{robot.sum(data.detailData, 'closingValue') | number}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="signature-place">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Ngày {{data.createDay}} tháng {{data.createMonth}} năm {{data.createYear}}</th>
+                        </tr>
+                        <tr>
+                            <th>Giám đốc</th>
+                            <th>Kế toán trưởng</th>
+                            <th>Người lập phiếu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

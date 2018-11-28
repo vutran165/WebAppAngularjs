@@ -1,0 +1,66 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}} {{lbl.lblCreate}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form" name="_form">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã siêu thị</label><span style="color: red"> (1*)</span>
+                    <input type="text" class="form-control" ng-model="target.maCuaHang" required="" name="_macuahang" maxlength="50">
+                    <span style="color: red" ng-show="_form._macuahang.$dirty && _form._macuahang.$invalid">
+                        <span ng-show="_form._macuahang.$error.required">Mã không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên siêu thị</label><span style="color: red"> (2*)</span>
+                    <input type="text" class="form-control" ng-model="target.tenCuaHang" name="_tencuahang" maxlength="200" required>
+                    <span style="color: red" ng-show="_form._tencuahang.$dirty && _form._tencuahang.$invalid">
+                        <span ng-show="_form._tencuahang.$error.required">Tên không được để trống</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Loại hình</label><span style="color: red"> (3*)</span>
+                    <input type="text" class="form-control" ng-model="target.loaiHinhCuaHang" name="_loaihinh" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.loaiHinhCuaHang | filter:$viewValue">
+                    <span style="color: red" ng-show="_form._loaihinh.$dirty && _form._loaihinh.$invalid">
+                        <span ng-show="_form._loaihinh.$error.required">Loại hình không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Địa điểm </label><span style="color: red"> (4*)</span>
+                    <input type="text" class="form-control" ng-model="target.diaDiemBanHang">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Đại diện siêu thị</label><span style="color: red"> (5*)</span>
+                    <input type="text" class="form-control" ng-model="target.daiDienDoanhNghiep">
+                </div>
+                <div class="col-lg-6">
+                    <label>Chức vụ</label><span style="color: red"> (6*)</span>
+                    <input type="text" class="form-control" ng-model="target.chucVu">
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Số điện thoại</label><span style="color: red"> (7*)</span>
+                    <input type="text" class="form-control" ng-model="target.soDienThoai">
+                </div>
+                <div class="col-lg-6">
+                    <label>Hộp thư</label><span style="color: red"> (8*)</span>
+                    <input type="text" class="form-control" ng-model="target.email">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

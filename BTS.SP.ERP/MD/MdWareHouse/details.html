@@ -1,0 +1,86 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close" ></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form">
+            <input type="hidden" ng-model="target.id">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Doanh nghiệp</label><span style="color: red"> (3*)</span>
+                    <input type="text" ng-model="target.maDoanhNghiep" name="_maDoanhNghiep" typeahead-editable="false" uib-typeahead="opt.id as opt.text for opt in tempData.companies | filter:$viewValue" class="form-control" typeahead-input-formatter="displayHelper(target.maDoanhNghiep, 'companies')" disabled />
+                    <span style="color: red" ng-show="_form._customs.$dirty && _form._customs.$invalid">
+                        <span ng-show="_form._customs.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+                <div class="col-lg-6">
+                    <label>Đơn vị hải quan chủ quản</label><span style="color: red"> (4*)</span>
+                    <input class="form-control" name="_maHaiQuan" type="text" ng-model="target.donViHaiQuanChuQuan" typeahead-editable="false" uib-typeahead="opt.value as opt.description for opt in tempData.donViHaiQuans | filter:$viewValue | limitTo:5" typeahead-on-select="selectedHaiQuan($item)" typeahead-input-formatter="formatLabel(target.donViHaiQuanChuQuan, 'donViHaiQuans')" disabled />
+                    <span style="color:red" ng-show="_form._maHaiQuan.$dirty && _form._maHaiQuan.$invalid">
+                        <span ng-show="_form._maHaiQuan.$error.required">Không được để trống</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Mã kho</label>
+                    <input type="text" class="form-control" ng-model="target.maKho" disabled>
+
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên kho</label>
+                    <input type="text" class="form-control" ng-model="target.tenKho" disabled>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Loại hình cửa hàng</label><span style="color: red"> (*)</span>
+                    <tags-input class="bootstrap" name="_loaiHinhCuaHang" ng-model="tagdoiTuongs" typeahead-editable="false"
+                                placeholder="Thêm loại hình" replace-spaces-with-dashes="false" disabled>
+                        <auto-complete source="loadDoiTuong($query)" min-length="0" debounce-delay="0" max-results="10" disabled></auto-complete>
+                    </tags-input>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Đối tượng khách hàng</label><span style="color: red"> (*)</span>
+                    <tags-input class="bootstrap" name="_customerTypes" ng-model="tagCustomerTypes" typeahead-editable="false"
+                                placeholder="Thêm loại hình" replace-spaces-with-dashes="false" disabled>
+                        <auto-complete source="loadCustomerType($query)" min-length="0" debounce-delay="0" max-results="10" disabled></auto-complete>
+                    </tags-input>
+                 
+                </div>
+            </div>
+
+
+
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Ghi chú</label>
+                    <textarea type="text" class="form-control" ng-model="target.ghiChu" maxlength="300" disabled></textarea>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <select class="form-control" ng-model="target.trangThai" ng-options="opt.value as opt.text for opt in tempData.status" disabled></select>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span>&ensp;{{config.label.btnCancel}}</button>
+    </div>
+</div>

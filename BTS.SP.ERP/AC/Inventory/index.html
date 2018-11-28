@@ -1,0 +1,115 @@
+﻿<!--<div class="form-group">
+    <label>Từ ngày</label>
+    <input style="height:20px; width:150px" type="date" ng-model="target.tuNgay" />
+    <label>Đến ngày</label>
+    <input style="height:20px; width:150px" type="date" ng-model="target.denNgay" />
+</div>
+<div class="form-group">
+    <label>Tài khoản</label>
+    <select ng-model="target.taiKhoan" ng-options="opt.value as opt.text for opt in tempData.accounts">
+        <option value="">-</option>
+    </select>
+    <label>Đơn vị</label>
+    <select ng-model="target.unitCode" ng-options="opt.value as opt.text for opt in tempData.unitUsers">
+        <option value="">-</option>
+    </select>
+    <button prevent-default ng-click="pdfMaker()">Báo cáo</button>
+</div>
+<hr />-->
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary" ng-form name="_form">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <span class="glyphicon glyphicon-bookmark"></span> Báo cáo xuất nhập tồn
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Đơn vị</label>
+                                    <select class="form-control" ng-model="target.unitCode" ng-change="getWareHouseImportByUnit(target.unitCode)" ng-options="opt.value as opt.text for opt in unitUsers" required>
+                                        <option value="">-</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Năm</label>
+                                    <input class="form-control" type="number" ng-model="target.year" required/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Kỳ</label>
+                                    <select class="form-control" ng-model="target.period" ng-options="opt.value as opt.text for opt in periods" required>
+                                        <option value="">-</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Kho hàng</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagWareHouses" class="tag label label-success">
+                                            {{item.value}}
+                                            <a class="close" href="" ng-click="removeWareHouse($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button"  class="btn btn-primary" ng-click="selectWareHouse()">Kho hàng</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Mã hàng</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagMerchandises" class="tag label label-success">
+                                            {{item.value}}
+                                            <a class="close" href="" ng-click="removeMerchandise($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectMerchandise()">Hàng </button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Loại hàng hóa</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagMerchandiseTypes" class="tag label label-success">
+                                            {{item.value}}
+                                            <a class="close" href="" ng-click="removeMerchandiseType($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectMerchandiseType()">Loại hàng</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Nhóm hàng hóa</label>
+                                    <div class="tags">
+                                        <div ng-repeat="item in tagMerchandiseGroups" class="tag label label-success">
+                                            {{item.value}}
+                                            <a class="close" href="" ng-click="removeMerchandiseGroup($index)">×</a>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary" ng-click="selectMerchandiseGroup()">Nhóm</button>
+                                </div>
+                            </div>
+                            <div class="col-md-2 col-md-offset-10">
+                                <div class="form-group">
+                                    <button class="btn btn-primary form-control" ng-disabled="_form.$invalid" prevent-default ng-click="report()">Báo cáo</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

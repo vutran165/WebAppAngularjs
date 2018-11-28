@@ -1,0 +1,59 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close" ></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <form role="form">
+            <input type="hidden" ng-model="target.id">
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Đơn vị cha</label>
+                    <select class="form-control" ng-model="target.parentId" ng-options="opt.value as opt.text for opt in tempData.donViHaiQuans" disabled></select>
+                </div>
+            </div>
+            <div class="row form-group">              
+                <div class="col-lg-6">
+                    <label>Mã đơn vị</label>
+                    <input type="text" class="form-control" ng-model="target.maHaiQuan" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Tên đơn vị</label>
+                    <input type="text" class="form-control" ng-model="target.tenHaiQuan" disabled>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Cấp</label>
+                    <input type="text" class="form-control" ng-model="target.cap" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Địa chỉ</label>
+                    <input type="text" class="form-control" ng-model="target.diaChi" disabled>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label>Số điện thoại</label>
+                    <input type="text" class="form-control" ng-model="target.soDienThoai" disabled>
+                </div>
+                <div class="col-lg-6">
+                    <label>Trạng thái</label>
+                    <select class="form-control" ng-model="target.trangThai" ng-options="opt.value as opt.text for opt in tempData.status" disabled></select>
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-lg-12">
+                    <label>Ghi chú</label>
+                    <input type="text" class="form-control" ng-model="target.ghiChu" disabled>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default class="btn btn-default" ng-click="cancel()"><span class="glyphicon glyphicon-remove"></span>&ensp;{{config.label.btnCancel}}</button>
+    </div>
+</div>

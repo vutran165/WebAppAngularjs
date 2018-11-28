@@ -1,0 +1,121 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading panel-toolbar">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="goHome()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+
+    <div style="padding-top: 10px;" class="form-group">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Mã đơn vị HQ</label>
+                <input type="text" class="form-control" ng-model="filtered.advanceData.maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)" name="_idHaiQuan" disabled="" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Tên đơn vị HQ</label>
+                <select class="form-control" ng-options="opt.value as opt.description for opt in lstDonViHaiQuan" ng-model="filtered.advanceData.maHaiQuan" name="_maHaiQuan" ng-change="onChangeMaHaiQuan(filtered.advanceData.maHaiQuan)" disabled="">
+                    <option value="">-- Lựa chọn đơn vị --</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Mã nhóm quyền</label>
+                <input type="text" class="form-control" ng-model="filtered.advanceData.idGroup" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Tên nhóm quyền</label>
+                <input type="text" class="form-control" ng-model="filtered.advanceData.nameGroup" />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>Mô tả</label>
+                <input type="text" class="form-control" ng-model="filtered.advanceData.description" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <button prevent-default style="float: left; margin-left: 15px;" class="btn btn-primary" title="create new item." ng-click="create()">&ensp;{{config.label.btnCreate}}</button>&nbsp;&nbsp;
+            <button class="btn btn-default" prevent-default title="Thiết lập nhóm" ng-click="addUsers()" ng-disabled="disThietLapNhom"><span class="glyphicon glyphicon-remove-circle"></span>&ensp;Thiết lập quyền</button>&nbsp;&nbsp;
+            <button class="btn btn-default" prevent-default title="Thêm người dùng" ng-click="addRole()" ng-disabled="disThietLapQuyen"><span class="glyphicon glyphicon-remove-circle"></span>&ensp;Thêm người dùng</button>&nbsp;&nbsp;
+        </div>
+        <div class="col-md-4">
+            <button style="float:right;margin-right:15px;" class="btn btn-default" prevent-default title="Tìm kiếm" ng-click="doSearch(filtered)"><span class="glyphicon glyphicon-search"></span>&ensp;{{config.label.btnSearch}}</button>
+        </div>
+
+    </div>
+    <div class="panel-body">
+        <table class="table table-striped table-hover no-margin-vertical">
+            <thead>
+                <tr class="headings">
+                    <th style="width:30px;" class="column-title">
+                    </th>
+                    <th class="column-title">#</th>
+                    <th class="column-title">
+                        <a class="title" href="" ng-click="sortType = 'idGroup'; sortReverse = !sortReverse">
+                            Mã nhóm quyền
+                            <span ng-show="sortType == 'idGroup' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'idGroup' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th class="column-title">
+                        <a class="title" href="" ng-click="sortType = 'nameGroup'; sortReverse = !sortReverse">
+                            Tên nhóm quyền
+                            <span ng-show="sortType == 'nameGroup' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'nameGroup' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th class="column-title">
+                        <a class="title" href="" ng-click="sortType = 'nameGroup'; sortReverse = !sortReverse">
+                            Đơn vị Hải quan
+                            <span ng-show="sortType == 'nameGroup' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'nameGroup' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th class="column-title">
+                        <a class="title" href="" ng-click="sortType = 'description'; sortReverse = !sortReverse">
+                            Mô tả
+                            <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th class="column-title">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-show="isLoading">
+                    <td colspan="8"><my-loading></my-loading></td>
+                </tr>
+                <tr class="even pointer" ng-repeat="item in data | orderBy:sortType:sortReverse">
+                    <td><input type="checkbox" ng-model="item.selected" id="check" ng-click="checkGroup($index,item)" /></td>
+                    <td>{{$index + 1}}</td>
+                    <td>{{item.idGroup}}</td>
+                    <td>{{item.nameGroup}}</td>
+                    <td>{{item.tenHaiQuan}}</td>
+                    <td>{{item.description}}</td>
+                    <td class="table-control btn-group">
+                        <a class="glyphicon glyphicon-pencil" ng-click="update(item)" data-toggle="tooltip" data-placement="top" title="Sửa"></a> &nbsp;&nbsp;&nbsp;
+                        <a class="glyphicon glyphicon-trash" ng-click="deleteItem($event, item)" data-toggle="tooltip" data-placement="top" title="Xóa"></a> &nbsp;&nbsp;&nbsp;
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel-footer">
+        <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                        ng-change="pageChanged()"
+                        items-per-page="paged.itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                        boundary-links="true" num-pages="paged.totalPage"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+        </uib-pagination>
+    </div>
+</div>

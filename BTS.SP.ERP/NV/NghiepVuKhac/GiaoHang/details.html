@@ -1,0 +1,274 @@
+﻿<form></form><!-- KHông hiểu sao để thế này thì nó mới không bị lỗi T_T-->
+<style>
+    #myWorkContent {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+    }
+</style>
+<div>
+    <div>
+        <div class="modal-header">
+            <h3 class="modal-title">{{title()}}</h3>
+            <div class="button-close" ng-click="cancel()">
+                <i class="glyphicon glyphicon-remove x-close"></i>
+            </div>
+        </div>
+        <div class="modal-body" ng-form name="_form">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Doanh nghiệp
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_maSoThue" type="text" ng-model="target.maSoThue" typeahead-editable="false" uib-typeahead="opt.id as opt.text for opt in tempData.companies | filter:$viewValue | limitTo:5" typeahead-input-formatter="formatLabel($model, 'companies')" disabled />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            ĐV HQ Chủ quản
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_maSoThue" type="text" ng-model="target.idHaiQuanChuQuan" uib-typeahead="opt.id as opt.text for opt in tempData.donViHaiQuans | filter:$viewValue | limitTo:5" typeahead-editable="false" typeahead-input-formatter="displayHelper($model, 'donViHaiQuans')" disabled />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            ĐV HQ Xác nhận
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_maSoThue" type="text" ng-model="target.idHaiQuanXacNhan" typeahead-editable="false" uib-typeahead="opt.id as opt.text for opt in tempData.donViHaiQuans | filter:$viewValue | limitTo:5" typeahead-input-formatter="displayHelper($model, 'donViHaiQuans')" disabled />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Số phiếu
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="target.soPhieu" maxlength="50" name="_soToKhai" disabled />
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Tên người mua hàng
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_tenKhachHang" type="text" ng-model="target.tenKhachHang" disabled />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Mã phiếu <span style="color: red">(*)</span>
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="target.maPhieu" maxlength="50" name="_maPhieu" typeahead-editable="false" required disabled />
+
+                            </div>
+                            <span style="color: red" ng-show="_form._maPhieu.$dirty && _form._maPhieu.$invalid">
+                                <span ng-show="_form._maPhieu.$error.required">Không được để trống</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Số hộ chiếu/giấy thông hành/thẻ lên bờ của hành khách:
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="target.hoChieuCmNd" maxlength="50" name="_hoChieuCmNd" typeahead-editable="false" disabled />
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Số hiệu chuyến bay, số hiệu phương tiện xuất cảnh (nếu có):
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_tenKhachHang" type="text" ng-model="target.soHieuChuyenBay" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Loại tiền<span style="color: red">(*)</span>
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_ngoaiTe" type="text" ng-model="target.ngoaiTe" typeahead-editable="false" uib-typeahead="opt.value as opt.text for opt in tempData.currencies | filter:$viewValue" typeahead-input-formatter="nameCurrency($model, 'currencies')" required disabled/>
+                                <span style="color:red" ng-show="_form._ngoaiTe.$dirty && _form._ngoaiTe.$invalid">
+                                    <span ng-show="_form._ngoaiTe.$error.required">Không được để trống</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Số hóa đơn
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_soHoaDon" type="text" ng-model="target.soHoaDon" disabled/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Ngày hóa đơn
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="target.ngayHoaDon" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" is-open="_ngayHoaDon" datepicker-localdate disabled/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Người duyệt
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" name="_soHoaDon" type="text" ng-model="target.nguoiDuyet" disabled />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="md-style-label-input">
+                            Ngày duyệt
+                        </div>
+                        <div class="md-4-style-input">
+                            <div class="add-input-zone">
+                                <input class="input-border-form" type="text" ng-model="target.ngayDuyet" placeholder="{{config.dateFormat}}"
+                                       uib-datepicker-popup="{{config.dateFormat}}" datepicker-localdate disabled />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal-body">
+            <uib-tabset active="active">
+                <uib-tab index="0" heading="Chi tiết">
+                    <div id="myWorkContent">
+                        <table class="table table-bordered table-hover table-condensed" style="width:1500px">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">STT</th>
+                                    <th class="text-center">Tên hàng</th>
+
+                                    <th class="text-center">Đơn vị tính</th>
+                                    <th class="text-center">Số lượng</th>
+                                    <th class="text-center">Số lượng đã kê khai</th>
+                                    <th class="text-center">Trị giá</th>
+                                    <th class="text-center">Ghi chú</th>
+                                   
+
+
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <th class="text-center">(1)</th>
+                                    <th class="text-center">(2)</th>
+                                    <th class="text-center">(3)</th>
+                                    <th class="text-center">(4)</th>
+                                    <th class="text-center">(5)</th>
+                                    <th class="text-center">(6)</th>
+                                    
+                                </tr>
+                            </thead>
+
+                            <tbody ng-form name="_formDetail">
+                                <tr ng-if="isLoading">
+                                    <td colspan="16"><my-loading></my-loading></td>
+                                </tr>
+                                <tr ng-repeat="item in target.dataDetails track by $index">
+                                    <td class="text-center">{{$index + 1}}</td>
+                                    <td nowrap>
+                                        {{item.tenHang}}
+                                    </td>
+                                    <td>
+                                        {{item.donViTinh}}
+                                    </td>
+                                    <td ng-style="item.colorRecord && {'background-color':'yellow'}">
+                                        {{item.soLuong}}
+                                    </td>
+                                    <td ng-style="item.colorRecord && {'background-color':'yellow'}">
+                                        {{item.soLuongDaKeKhai}}
+                                    </td>
+                                    <td>
+                                        {{item.triGia}}
+                                    </td>
+                                    <td>
+                                        {{item.ghiChu}}
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="panel-footer">
+                        <uib-pagination class="no-margin-vertical pagination-sm" ng-model="paged.currentPage"
+                                        ng-change="pageChanged()"
+                                        items-per-page="paged.itemsPerPage" ng-show="paged.totalItems > 0" total-items="paged.totalItems" max-size="paged.pageSize"
+                                        boundary-links="true" num-pages="paged.totalPage"
+                                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+                        </uib-pagination>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <span ng-show="Loading"><my-loading></my-loading></span>
+        <button prevent-default class="btn btn-default" ng-disabled="Loading" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>

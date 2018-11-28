@@ -1,0 +1,57 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{title()}}</h3>
+        <div class="button-close" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove x-close"></i>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="col-sm-14">
+            <form role="form" name="_form">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <h4>Danh mục :</h4>
+                        <div class="form-group">
+                            <h4>{{target.menu}}</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h4>Tài khoản :</h4>
+                        <div class="form-group">
+                            <h4>{{target.username}}</h4>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Quyền</label><br />
+                            <label>
+                                <input type="checkbox" value="1" ng-model="isView">
+                                Xem
+                            </label><br />
+                            <label>
+                                <input type="checkbox" value="2" ng-model="isAdd">
+                                Thêm
+                            </label><br />
+                            <label>
+                                <input type="checkbox" value="3" ng-model="isEdit">
+                                Sửa
+                            </label><br />
+                            <label>
+                                <input type="checkbox" value="4" ng-model="isDelete">
+                                Xóa
+                            </label><br />
+                            <label>
+                                <input type="checkbox" value="5" ng-model="isApprove">
+                                Duyệt
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button prevent-default type="submit" class="btn btn-primary" ng-disabled="_form.$invalid" ng-click="save()">{{config.label.btnSubmit}}</button>
+        <button prevent-default class="btn btn-default" ng-click="cancel()">{{config.label.btnCancel}}</button>
+    </div>
+</div>
